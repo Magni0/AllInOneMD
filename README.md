@@ -8,8 +8,8 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 
 ## Wireframes
 
-[](docs/login-wireframe.png)
+[](/docs/login-wireframe.png)
 
-[](docs/sign-up-wireframe.png)
+[](/docs/sign-up-wireframe.png)
 
-[](docs/main-wireframe.png)
+[](/docs/main-wireframe.png)
