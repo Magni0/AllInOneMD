@@ -13,3 +13,42 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 ![sign up page](docs/sign-up-wireframe.png)
 
 ![main page](docs/main-wireframe.png)
+
+## Installation
+
+1. Navigate to the dir you wish to have the software and clone it with this command:
+
+    git clone https://github.com/Magni0/AllInOneMD.git
+
+2. Create an new virtual enviroment with this command:
+
+    python -m venv venv
+
+ If python isnt installed it can be downloaded [here](https://www.python.org/downloads/) for windows or
+
+    sudo apt-get install software-properties-common
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt-get update
+    sudo apt-get install python3.8
+
+ for linux
+
+3. Activate the virtual enviroment:
+
+ for windows (cmd)
+
+    venv\Scripts\activate.bat
+
+ for linux (bash)
+
+    source venv/bin/activate
+
+4. Install requirements:
+
+    pip3 install -r requirements.txt
+
+ If you do not have pip a guide for it can be found [here](https://pip.pypa.io/en/stable/installing/)
+
+5. Then the app can be run by:
+
+    python src/main.py
