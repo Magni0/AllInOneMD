@@ -1,4 +1,7 @@
 import unittest
+import sys
+path = '/home/runner/work/AllInOneMD/AllInOneMD/src'
+sys.path.append(path)
 from main import add
 
 class TestAdd(unittest.TestCase):
