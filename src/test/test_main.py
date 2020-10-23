@@ -1,6 +1,6 @@
 import unittest
 import sys
-path = '/home/runner/work/AllInOneMD/AllInOneMD/src'
+path = '/home/runner/work/AllInOneMD/AllInOneMD/'
 sys.path.append(path)
 from main import add
 
