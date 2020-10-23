@@ -1,8 +1,8 @@
 import unittest
 import sys
-path = '/home/runner/work/AllInOneMD/AllInOneMD/'
+path = '/home/runner/work/AllInOneMD/AllInOneMD'
 sys.path.append(path)
-from main import add
+import main
 
 class TestAdd(unittest.TestCase):
     def test_add(self):
