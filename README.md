@@ -24,22 +24,22 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 
     python -m venv venv
 
- If python isnt installed it can be downloaded [here](https://www.python.org/downloads/) for windows or
+    If python isnt installed it can be downloaded [here](https://www.python.org/downloads/) for windows or
 
     sudo apt-get install software-properties-common
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt-get update
     sudo apt-get install python3.8
 
- for linux
+    for linux
 
 3. Activate the virtual enviroment:
 
- for windows (cmd)
+    for windows (cmd)
 
     venv\Scripts\activate.bat
 
- for linux (bash)
+    for linux (bash)
 
     source venv/bin/activate
 
@@ -47,7 +47,7 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 
     pip3 install -r requirements.txt
 
- If you do not have pip a guide for it can be found [here](https://pip.pypa.io/en/stable/installing/)
+    If you do not have pip a guide for it can be found [here](https://pip.pypa.io/en/stable/installing/)
 
 5. Then the app can be run by:
 
