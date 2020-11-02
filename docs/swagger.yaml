@@ -1,0 +1,48 @@
+swagger: "2.0"
+info:
+  description: "This is a server to sort, change and convert md file to pdf format"
+  version: "1.0.0"
+  title: "AllInOneMD"
+paths:
+  /account:
+    post:
+      tags:
+        - "login"
+      summary: "adda a new account"
+      operationId: "NewAccount"
+      responses:
+        "405":
+          description: "Invalid input"
+  /account/{AccountId}:
+    get:
+      tags:
+        - "login"
+      summary: "retrives account data"
+      operationId: "LoginToAccount"
+      parameters:
+      - name: "AccountId"
+        in: "path"
+        description: "ID of account to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "405":
+          description: "Invalid input"
+  /document:
+    post:
+      tags:
+         - "doc"
+      summary: "make new md document"
+      operationId: "NewDoc"
+      responses:
+        "405":
+          description: "Invalid input"
+    get:
+      tags:
+        - "doc"
+      summary: "retrive md doc"
+      operationId: "OpenDoc"
+      responses:
+        "405":
+          description: "Invalid input"

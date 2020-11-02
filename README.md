@@ -52,3 +52,13 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 5. Then the app can be run by:
 
     python src/main.py
+
+## displaying documented endpoints
+
+1. Go to [this website](https://editor.swagger.io/#)
+
+2. Click on file
+
+3. Select 'import file'
+
+4. select the swagger.yaml file located in /docs
