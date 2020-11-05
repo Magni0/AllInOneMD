@@ -8,7 +8,7 @@ paths:
     post:
       tags:
         - "login"
-      summary: "adda a new account"
+      summary: "add's a new account"
       operationId: "NewAccount"
       responses:
         "405":
@@ -17,7 +17,7 @@ paths:
     get:
       tags:
         - "login"
-      summary: "retrives account data"
+      summary: "retrieve's account data"
       operationId: "LoginToAccount"
       parameters:
       - name: "AccountId"
@@ -33,16 +33,55 @@ paths:
     post:
       tags:
          - "doc"
-      summary: "make new md document"
+      summary: "make's new md document"
       operationId: "NewDoc"
       responses:
         "405":
           description: "Invalid input"
+  /document/{DocumentId}:
     get:
       tags:
         - "doc"
-      summary: "retrive md doc"
-      operationId: "OpenDoc"
+      summary: "retrieve's md doc"
+      operationId: "OpenDocument"
+      parameters:
+      - name: "DocumentId"
+        in: "path"
+        description: "ID of document to return"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
         "405":
           description: "Invalid input"
+    patch:
+      tags:
+        - "doc"
+      summary: "edit md document"
+      operationId: "EditDocument"
+      parameters:
+      - name: "DocumentId"
+        in: "path"
+        description: "ID of document to edit"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "405":
+          description: "Invalid input"
+    delete:
+      tags:
+        - "doc"
+      summary: "deletes md document"
+      operationId: "DelDocument"
+      parameters:
+      - name: "DocumentId"
+        in: "path"
+        description: "ID of document to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "405":
+          description: "Invalid input"
+      
