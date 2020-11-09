@@ -5,7 +5,7 @@ app = Flask(__name__)
 @app.route("/md", methods=["GET"])
 def doc_index():
     # retrive all md documents
-    pass
+    cursor.execute("SELECT * FROM documents")
 
 @app.route("/md", methods=["POST"])
 def doc_create():

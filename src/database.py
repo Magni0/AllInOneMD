@@ -5,6 +5,7 @@ import psycopg2
 connection = psycopg2.connect (
     database="allinonemd",
     user="mddbadmin",
+    password="password",
     host="localhost"
 )
 
