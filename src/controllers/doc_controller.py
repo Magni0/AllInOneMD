@@ -7,6 +7,7 @@ def doc_index():
     # retrive all md documents
     cursor.execute("SELECT * FROM documents")
     docs = cursor.fetchall()
+    
     return jsonify(docs)
 
 @app.route("/md", methods=["POST"])
@@ -19,6 +20,7 @@ def doc_create():
     sql = "SELECT * FROM documents ORDER BY ID DESC LIMIT 1"
     cursor.execute(sql)
     book = cursor.fetchone()
+    
     return jsonify(book)
 
 @app.route("/md/<int:id>", methods=["GET"])
@@ -27,6 +29,7 @@ def doc_retrive(id):
     sql = "SELECT * FROM documents WHERE id = %s;"
     cursor.execute(sql, (id,))
     book = cursor.fetchone()
+    
     return jsonify(book)
 
 @app.route("/md/<int:id>", methods=["PUT", "PATCH"])
@@ -39,9 +42,19 @@ def doc_update(id):
     sql = "SELECT * FROM documents WHERE id = %s"
     cursor.execute(sql, (id,))
     book = cursor.fetchone()
+    
     return jsonify(book)
 
 @app.route("/md/<int:id>", methods=["DELETE"])
 def doc_delete(id):
     # delete a document
-    pass
+    sql = "SELECT * FROM documents WHERE id = %s;"
+    cursor.execute(sql, (id,))
+    doc = cursor.fetchone()
+    
+    if doc:
+        sql = "DELETE FROM documents WHERE id = %s;"
+        cursor.execute(sql, (id,))
+        connection.commit()
+    
+    return jsonify(book)
