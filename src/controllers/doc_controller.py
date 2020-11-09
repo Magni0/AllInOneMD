@@ -12,7 +12,14 @@ def doc_index():
 @app.route("/md", methods=["POST"])
 def doc_create():
     # create new doc
-    pass
+    sql = "INSERT INTO documents (name) VALUES (%s);"
+    cursor.execute(sql, (request.json["name"],))
+    connection.commit()
+
+    sql = "SELECT * FROM documents ORDER BY ID DESC LIMIT 1"
+    cursor.execute(sql)
+    book = cursor.fetchone()
+    return jsonify(book)
 
 @app.route("/md/<int:id>", methods=["GET"])
 def doc_retrive(id):
