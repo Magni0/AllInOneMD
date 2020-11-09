@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 app = Flask(__name__)
 
 
@@ -6,6 +6,8 @@ app = Flask(__name__)
 def doc_index():
     # retrive all md documents
     cursor.execute("SELECT * FROM documents")
+    docs = cursor.fetchall()
+    return jsonify(docs)
 
 @app.route("/md", methods=["POST"])
 def doc_create():
