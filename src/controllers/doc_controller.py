@@ -24,12 +24,22 @@ def doc_create():
 @app.route("/md/<int:id>", methods=["GET"])
 def doc_retrive(id):
     #get single doc
-    pass
+    sql = "SELECT * FROM documents WHERE id = %s;"
+    cursor.execute(sql, (id,))
+    book = cursor.fetchone()
+    return jsonify(book)
 
 @app.route("/md/<int:id>", methods=["PUT", "PATCH"])
 def doc_update(id):
     # update a document
-    pass
+    sql = "UPDATE documents SET name = %s WHERE id = %s;"
+    cursor.execute(sql, (request.json["name"], id))
+    connection.commit()
+
+    sql = "SELECT * FROM documents WHERE id = %s"
+    cursor.execute(sql, (id,))
+    book = cursor.fetchone()
+    return jsonify(book)
 
 @app.route("/md/<int:id>", methods=["DELETE"])
 def doc_delete(id):
