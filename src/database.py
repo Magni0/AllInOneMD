@@ -1,13 +1,7 @@
-import psycopg2
+from flask_sqlalchemy import SQLAlchemy
 
-connection = psycopg2.connect (
-    database="allinonemd",
-    user="mddbadmin",
-    password="password",
-    host="localhost"
-)
-
-cursor = connection.cursor()
-
-cursor.execute("CREATE TABLE IF NOT EXISTS documents (id serial PRIMARY KEY, name varchar);")
-connection.commit()
+def init_db(app):
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql+psycopg2://mddbadmin:password@localhost:5432/allinonemd"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    db = SQLAlchemy(app)
+    return db

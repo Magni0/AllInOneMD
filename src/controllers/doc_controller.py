@@ -1,60 +1,49 @@
-from database import cursor, connection
+from models.Document import Document
+from main import db
+from schemas.DocSchema import doc_schema, docs_schema
 from flask import Blueprint, request, jsonify
 md = Blueprint('md', __name__, url_prefix="/md")
 
 @md.route("/", methods=["GET"])
 def doc_index():
     # retrive all md documents
-    cursor.execute("SELECT * FROM documents")
-    docs = cursor.fetchall()
-    
-    return jsonify(docs)
+    docs = Document.query.all()
+    return jsonify(docs_schema.dump(docs))
 
 @md.route("/", methods=["POST"])
 def doc_create():
     # create new doc
-    sql = "INSERT INTO documents (name) VALUES (%s);"
-    cursor.execute(sql, (request.json["name"],))
-    connection.commit()
+    doc_fields = doc_schema.load(request.json)
 
-    sql = "SELECT * FROM documents ORDER BY ID DESC LIMIT 1"
-    cursor.execute(sql)
-    book = cursor.fetchone()
+    new_doc = Document()
+    new_doc.name = doc_fields["name"]
     
-    return jsonify(book)
+    db.session.add(new_doc)
+    db.session.commit()
+    
+    return jsonify(doc_schema.dump(new_doc))
 
 @md.route("/<int:id>", methods=["GET"])
 def doc_retrive(id):
-    #get single doc
-    sql = "SELECT * FROM documents WHERE id = %s;"
-    cursor.execute(sql, (id,))
-    book = cursor.fetchone()
-    
-    return jsonify(book)
+    # get single doc
+    doc = Document.query.get(id)
+    return jsonify(doc_schema.dump(doc))
 
 @md.route("/<int:id>", methods=["PUT", "PATCH"])
 def doc_update(id):
     # update a document
-    sql = "UPDATE documents SET name = %s WHERE id = %s;"
-    cursor.execute(sql, (request.json["name"], id))
-    connection.commit()
+    docs = Document.query.filter_by(id=id)
+    doc_fields = doc_schema.load(request.json)
+    docs.update(doc_fields)
+    db.session.commit()
 
-    sql = "SELECT * FROM documents WHERE id = %s"
-    cursor.execute(sql, (id,))
-    book = cursor.fetchone()
-    
-    return jsonify(book)
+    return jsonify(doc_schema.dump(docs[0]))
 
 @md.route("/<int:id>", methods=["DELETE"])
 def doc_delete(id):
     # delete a document
-    sql = "SELECT * FROM documents WHERE id = %s;"
-    cursor.execute(sql, (id,))
-    doc = cursor.fetchone()
-    
-    if doc:
-        sql = "DELETE FROM documents WHERE id = %s;"
-        cursor.execute(sql, (id,))
-        connection.commit()
-    
-    return jsonify(book)
+    doc = Document.query.get(id)
+    db.session.delete(doc)
+    db.session.commit()
+
+    return jsonify(doc_schema.dump(doc))
