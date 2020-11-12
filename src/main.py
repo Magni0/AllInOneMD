@@ -3,5 +3,6 @@ app = Flask(__name__)
 
 from database import connection, cursor
 
-from doc_controller import md
-app.register_blueprint(md)
+from controllers import registable_controllers
+for controller in registable_controllers:
+    app.register_blueprint(controller)

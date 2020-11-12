@@ -1,8 +1,8 @@
 from database import cursor, connection
 from flask import Blueprint, request, jsonify
-md = Blueprint('md', __name__)
+md = Blueprint('md', __name__, url_prefix="/md")
 
-@md.route("/md", methods=["GET"])
+@md.route("/", methods=["GET"])
 def doc_index():
     # retrive all md documents
     cursor.execute("SELECT * FROM documents")
@@ -10,7 +10,7 @@ def doc_index():
     
     return jsonify(docs)
 
-@md.route("/md", methods=["POST"])
+@md.route("/", methods=["POST"])
 def doc_create():
     # create new doc
     sql = "INSERT INTO documents (name) VALUES (%s);"
@@ -23,7 +23,7 @@ def doc_create():
     
     return jsonify(book)
 
-@md.route("/md/<int:id>", methods=["GET"])
+@md.route("/<int:id>", methods=["GET"])
 def doc_retrive(id):
     #get single doc
     sql = "SELECT * FROM documents WHERE id = %s;"
@@ -32,7 +32,7 @@ def doc_retrive(id):
     
     return jsonify(book)
 
-@md.route("/md/<int:id>", methods=["PUT", "PATCH"])
+@md.route("/<int:id>", methods=["PUT", "PATCH"])
 def doc_update(id):
     # update a document
     sql = "UPDATE documents SET name = %s WHERE id = %s;"
@@ -45,7 +45,7 @@ def doc_update(id):
     
     return jsonify(book)
 
-@md.route("/md/<int:id>", methods=["DELETE"])
+@md.route("/<int:id>", methods=["DELETE"])
 def doc_delete(id):
     # delete a document
     sql = "SELECT * FROM documents WHERE id = %s;"
