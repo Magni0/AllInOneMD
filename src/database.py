@@ -1,5 +1,3 @@
-from flask import Flask, request
-app = Flask(__name__)
 import psycopg2
 
 connection = psycopg2.connect (
