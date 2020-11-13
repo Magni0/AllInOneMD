@@ -55,7 +55,7 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 
     `python {pathtofile}/main.py`
 
-## displaying documented endpoints
+## Displaying Documented Endpoints
 
 1. Go to [this website](https://editor.swagger.io/#)
 
@@ -64,3 +64,7 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 3. Select 'import file'
 
 4. select the swagger.yaml file located in /docs
+
+## Database
+
+![database schema](docs/dbschema.png)
