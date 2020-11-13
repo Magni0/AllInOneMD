@@ -26,7 +26,7 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 
     If python isnt installed it can be downloaded [here](https://www.python.org/downloads/) for windows or
 
-    ```
+    ```bash
     sudo apt-get install software-properties-common
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt-get update
@@ -68,3 +68,9 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 ## Database
 
 ![database schema](docs/dbschema.png)
+
+### Database relationships
+
+users > documents: one-to-many
+documents > projects: one-to-many
+projects > images: one-to-many
