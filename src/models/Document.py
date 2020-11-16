@@ -1,4 +1,4 @@
-from main import db
+# from main import db
 
 class Document(db.Model):
     __tablename__="documents"
