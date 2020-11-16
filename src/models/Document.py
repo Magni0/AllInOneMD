@@ -1,4 +1,3 @@
-# creates a circular import
 from main import db
 
 class Document(db.Model):
