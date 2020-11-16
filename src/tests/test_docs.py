@@ -1,5 +1,5 @@
 import unittest
-from main import create_app, db
+from src.main import create_app, db
 
 class TestDocs(unittest.TestCase):
     @classmethod
