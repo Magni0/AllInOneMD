@@ -1,6 +1,6 @@
 from flask import Flask
 app = Flask(__name__)
-app.config.from_object("default_settings")
+app.config.from_object("default_settings.app_config")
 
 from database import init_db
 db = init_db(app)
