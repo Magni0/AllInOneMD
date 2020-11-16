@@ -8,6 +8,9 @@ db = init_db(app)
 from flask_marshmallow import Marshmallow
 ma = Marshmallow(app)
 
+from commands import db_commands
+app.register_blueprint(db_commands)
+
 from controllers import registable_controllers
 for controller in registable_controllers:
     app.register_blueprint(controller)
