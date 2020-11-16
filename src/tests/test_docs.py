@@ -1,4 +1,5 @@
 import unittest
+import json
 from main import create_app, db
 
 class TestDocs(unittest.TestCase):
@@ -29,13 +30,42 @@ class TestDocs(unittest.TestCase):
         self.assertIsInstance(data, list)
     
     def test_doc_create(self):
-        pass
+        response = self.client.post(
+            "/md/",
+            data=json.dumps({"name":"testname"}),
+            content_type='application/json',
+        )
+
+        data = json.loads(response.get_data(as_text=True))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(data, dict)
 
     def test_doc_retrive(self):
-        pass
+        response = self.client.get("/md/")
+
+        data = response.get_json()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(data, list)
 
     def test_doc_update(self):
         pass
+        # response = self.client.put(
+        #     "/md/1",
+        #     data=json.dumps({"name":"testname"}),
+        #     content_type='application/json',
+        # )
+
+        # data = json.loads(response.get_data(as_text=True))
+
+        # self.assertEqual(response.status_code, 200)
+        # self.assertIsInstance(data, list)
 
     def test_doc_delete(self):
-        pass
+        response = self.client.get("/md/1")
+
+        data = response.get_json()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(data, dict)
