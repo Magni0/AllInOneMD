@@ -6,7 +6,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Authentication
         load_only = ["password"]
-    
+
     username = ma.String(required=True, validate=Length(min=1))
     password = ma.String(required=True, validate=Length(min=6))
 
