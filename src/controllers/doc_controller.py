@@ -58,15 +58,19 @@ def doc_retrive(id):
 @jwt_required
 def doc_update(id):
     # update a document
-    docs = Document.query.filter_by(id=id)
     doc_fields = doc_schema.load(request.json)
-    
     user_id = get_jwt_identity()
+
     user = Authentication.query.get(user_id)
 
     if not user:
         return abort(401, description="Invalid user")
     
+    docs = Document.query.filter_by(id=id, user_id=user.id)
+    
+    if docs.count() != 1:
+        return abort(401, description="Unauthorized to update this document")
+
     docs.update(doc_fields)
     db.session.commit()
 
@@ -77,12 +81,17 @@ def doc_update(id):
 def doc_delete(id):
     # delete a document
     user_id = get_jwt_identity()
+
     user = Authentication.query.get(user_id)
 
     if not user:
         return abort(401, description="Invalid user")
 
     doc = Document.query.get(id)
+    
+    if not doc:
+        return abort(400)
+    
     db.session.delete(doc)
     db.session.commit()
 
