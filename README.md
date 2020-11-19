@@ -71,6 +71,6 @@ To allow the upload, storage, editing, downloading and converting to pdf (with i
 
 ### Database relationships
 
-users > documents: one-to-many
-documents > projects: one-to-many
-projects > images: one-to-many
+- users > documents: one-to-many
+- documents > projects: one-to-many
+- projects > images: one-to-many
