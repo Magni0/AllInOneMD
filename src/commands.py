@@ -16,7 +16,7 @@ def drop_db():
 @db_commands.cli.command("seed")
 def seed_db():
     from models.Document import Document
-    from models.Authentication import Authentication
+    from models.Authentication import User
     from main import bcrypt
     from faker import Faker
     import random
@@ -25,7 +25,7 @@ def seed_db():
     users = []
 
     for i in range(5):
-        user = Authentication()
+        user = User()
         user.username = f"testuser{i}"
         user.password = bcrypt.generate_password_hash("testpasswd").decode("utf-8")
         db.session.add(user)

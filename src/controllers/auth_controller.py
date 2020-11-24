@@ -1,4 +1,4 @@
-from models.Authentication import Authentication as User
+from models.Authentication import User
 from schemas.UserSchema import user_schema
 from flask import Blueprint, request, jsonify, abort
 from main import db, bcrypt

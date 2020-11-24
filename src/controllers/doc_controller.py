@@ -1,5 +1,5 @@
 from models.Document import Document
-from models.Authentication import Authentication
+from models.Authentication import User
 from main import db
 from schemas.DocSchema import doc_schema, docs_schema
 from flask import Blueprint, request, jsonify
@@ -11,7 +11,7 @@ md = Blueprint('document', __name__, url_prefix="/document")
 def doc_index():
     # retrive all md documents
     user_id = get_jwt_identity()
-    user = Authentication.query.get(user_id)
+    user = User.query.get(user_id)
 
     if not user:
         return abort(401, description="Invalid user")
@@ -26,7 +26,7 @@ def doc_create():
     doc_fields = doc_schema.load(request.json)
     user_id = get_jwt_identity()
     
-    user = Authentication.query.get(user_id)
+    user = User.query.get(user_id)
 
     if not user:
         return abort(401, description="Invalid user")
@@ -46,7 +46,7 @@ def doc_create():
 def doc_retrive(id):
     # get single doc
     user_id = get_jwt_identity()
-    user = Authentication.query.get(user_id)
+    user = User.query.get(user_id)
 
     if not user:
         return abort(401, description="Invalid user")
@@ -61,7 +61,7 @@ def doc_update(id):
     doc_fields = doc_schema.load(request.json)
     user_id = get_jwt_identity()
 
-    user = Authentication.query.get(user_id)
+    user = User.query.get(user_id)
 
     if not user:
         return abort(401, description="Invalid user")
@@ -82,7 +82,7 @@ def doc_delete(id):
     # delete a document
     user_id = get_jwt_identity()
 
-    user = Authentication.query.get(user_id)
+    user = User.query.get(user_id)
 
     if not user:
         return abort(401, description="Invalid user")

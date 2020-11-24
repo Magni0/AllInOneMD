@@ -1,10 +1,10 @@
 from main import ma
-from models.Authentication import Authentication
+from models.Authentication import User
 from marshmallow.validate import Length
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Authentication
+        model = User
         load_only = ["password"]
 
     username = ma.String(required=True, validate=Length(min=1))
