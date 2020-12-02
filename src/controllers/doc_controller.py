@@ -3,33 +3,25 @@ from models.Authentication import User
 from main import db
 from schemas.DocSchema import doc_schema, docs_schema
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
+from services.decorators import auth_decorator
 md = Blueprint('document', __name__, url_prefix="/document")
 
 @md.route("/", methods=["GET"])
 @jwt_required
-def doc_index():
-    # retrive all md documents
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-
-    if not user:
-        return abort(401, description="Invalid user")
+@auth_decorator
+def doc_index(user=None):
+    # reterive all md documents
     
     docs = Document.query.all()
     return jsonify(docs_schema.dump(docs))
 
 @md.route("/", methods=["POST"])
 @jwt_required
-def doc_create():
+@auth_decorator
+def doc_create(user=None):
     # create new doc
     doc_fields = doc_schema.load(request.json)
-    user_id = get_jwt_identity()
-    
-    user = User.query.get(user_id)
-
-    if not user:
-        return abort(401, description="Invalid user")
 
     new_doc = Document()
     new_doc.docname = doc_fields["docname"]
@@ -43,28 +35,19 @@ def doc_create():
 
 @md.route("/<int:id>", methods=["GET"])
 @jwt_required
-def doc_retrive(id):
+@auth_decorator
+def doc_retrive(id, user=None):
     # get single doc
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-
-    if not user:
-        return abort(401, description="Invalid user")
 
     doc = Document.query.get(id)
     return jsonify(doc_schema.dump(doc))
 
 @md.route("/<int:id>", methods=["PUT", "PATCH"])
 @jwt_required
-def doc_update(id):
+@auth_decorator
+def doc_update(id, user=None):
     # update a document
     doc_fields = doc_schema.load(request.json)
-    user_id = get_jwt_identity()
-
-    user = User.query.get(user_id)
-
-    if not user:
-        return abort(401, description="Invalid user")
     
     docs = Document.query.filter_by(id=id, user_id=user.id)
     
@@ -78,14 +61,9 @@ def doc_update(id):
 
 @md.route("/<int:id>", methods=["DELETE"])
 @jwt_required
-def doc_delete(id):
+@auth_decorator
+def doc_delete(id, user=None):
     # delete a document
-    user_id = get_jwt_identity()
-
-    user = User.query.get(user_id)
-
-    if not user:
-        return abort(401, description="Invalid user")
 
     doc = Document.query.get(id)
     

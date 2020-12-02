@@ -1,17 +1,19 @@
 from models.Authentication import User
+from functools import wraps
 from flask import abort
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import get_jwt_identity
 
-class Dcorators:
-    def auth_decorator(func):
-        def wrapper(*args, **kwargs):
 
-            user_id = get_jwt_identity()
-            user = User.query.get(user_id)
+def auth_decorator(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
 
-            if not user:
-                return abort(401, description="Invalid user")
+        user_id = get_jwt_identity()
+        user = User.query.get(user_id)
 
-            func_value = func(*args, **kwargs):
+        if not user:
+            return abort(401, description="Invalid user")
 
-        return wrapper
+        return func(*args, user=user, **kwargs)
+
+    return wrapper

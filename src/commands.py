@@ -27,7 +27,7 @@ def seed_db():
 
     for i in range(5):
         user = User()
-        user.username = f"testuser{i}"
+        user.email = f"testuser{i}"
         user.password = bcrypt.generate_password_hash("testpasswd").decode("utf-8")
         db.session.add(user)
         users.append(user)
@@ -36,7 +36,7 @@ def seed_db():
 
     for i in range(20):
         doc = Document()
-        doc.name = faker.catch_phrase()
+        doc.docname = faker.catch_phrase()
         doc.user_id = random.choice(users).id
         db.session.add(doc)
     
