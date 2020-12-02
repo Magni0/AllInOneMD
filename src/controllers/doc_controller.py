@@ -32,7 +32,7 @@ def doc_create():
         return abort(401, description="Invalid user")
 
     new_doc = Document()
-    new_doc.name = doc_fields["name"]
+    new_doc.docname = doc_fields["docname"]
 
     user.documents.append(new_doc)
     

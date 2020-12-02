@@ -7,7 +7,7 @@ class DocSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Document
     
-    name = ma.String(required=True, validate=Length(min=1))
+    docname = ma.String(required=True, validate=Length(min=1))
     user = ma.Nested(UserSchema)
 
 doc_schema = DocSchema()
