@@ -43,6 +43,6 @@ def create_app():
     @app.errorhandler(500)
     def handle_500(error):
         app.logger.error(error)
-        return ("bad stuff", 500)
+        return ("", 500)
 
     return app

@@ -14,7 +14,7 @@ def auth_register():
     user = User.query.filter_by(email=user_fields["email"]).first()
 
     if user:
-         return abort(400, description="Email already registered")
+        return abort(400, description="Email already registered")
 
     user = User()
     user.email = user_fields["email"]
