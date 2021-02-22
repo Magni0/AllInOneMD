@@ -27,6 +27,7 @@ jobs:
       - name: Run Tests
         run: |
           cd /home/runner/work/AllInOneMD/AllInOneMD/src
+          sleep 10s
           export DB_URI=postgresql+psycopg2://mddbadmin:password@localhost:5432/allinonemd
           export JWT_SECRET_KEY=testkey
           export FLASK_APP="main:create_app()"
