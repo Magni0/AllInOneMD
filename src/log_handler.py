@@ -2,8 +2,10 @@ import os
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
+# gets the path of logs dir
 log_dir = os.path.join(os.getcwd(), 'logs')
 
+# if logs dir doesnt exist: make logs dir
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 
