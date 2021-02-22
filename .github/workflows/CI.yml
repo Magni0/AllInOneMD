@@ -18,7 +18,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Setup DB
+        uses: harmon758/postgresql-action@v1
+        with:
+          postgresql db: allinonemd
+          postgresql user: mddbadmin
+          postgresql password: password
       - name: Run Tests
         run: |
           cd /home/runner/work/AllInOneMD/AllInOneMD/src
+          export DB_URI=postgresql+psycopg2://mddbadmin:password@localhost:5432/allinonemd
+          export JWT_SECRET_KEY=testkey
+          export FLASK_APP="main:create_app()"
+          export FLASK_ENV=development
           python -m unittest discover -s tests -v
