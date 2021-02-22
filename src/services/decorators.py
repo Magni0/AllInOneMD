@@ -3,7 +3,7 @@ from functools import wraps
 from flask import abort
 from flask_jwt_extended import get_jwt_identity
 
-
+#this is only temporary and will be removed once forms are implemented
 def auth_decorator(func):
     @wraps(func)
     def wrapper(*args, **kwargs):

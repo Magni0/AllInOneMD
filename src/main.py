@@ -16,30 +16,43 @@ jwt = JWTManager()
 migrate = Migrate()
 
 def create_app():
+
+    """This is the main function that works off of the contoller modules, model modules
+    and Schema modules. When running the application, run it from this module.
+    """
+
+    # init flask with the config setting from default_settings.py 
     app = Flask(__name__)
     app.config.from_object("default_settings.app_config")
 
+    # if the enviroment is production: log errors in logs dir
     if app.config["ENV"] == "production":
         from log_handler import file_handler
         app.logger.addHandler(file_handler)
 
+    # init flask extentions in flask app
     db.init_app(app)
     ma.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
     migrate.init_app(app, db)
 
+    # imports Blueprint from commands.py to allow custom flask commands
+    # custom commands are written in commands.py
     from commands import db_commands
     app.register_blueprint(db_commands)
 
+    # cycles through __init__.py in controllers dir to register Blueprints to flask app
     from controllers import registable_controllers
     for controller in registable_controllers:
         app.register_blueprint(controller)
 
+    # handles validation errors
     @app.errorhandler(ValidationError)
     def handle_bad_request(error):
         return (jsonify(error.messages), 400)
 
+    # handles other server errors
     @app.errorhandler(500)
     def handle_500(error):
         app.logger.error(error)

@@ -11,7 +11,8 @@ md = Blueprint('document', __name__, url_prefix="/document")
 @jwt_required
 @auth_decorator
 def doc_index(user=None):
-    # reterive all md documents
+    
+    """reterive all md documents"""
     
     docs = Document.query.all()
     return jsonify(docs_schema.dump(docs))
@@ -20,7 +21,9 @@ def doc_index(user=None):
 @jwt_required
 @auth_decorator
 def doc_create(user=None):
-    # create new doc
+    
+    """create new doc"""
+
     doc_fields = doc_schema.load(request.json)
 
     new_doc = Document()
@@ -37,7 +40,8 @@ def doc_create(user=None):
 @jwt_required
 @auth_decorator
 def doc_retrive(id, user=None):
-    # get single doc
+    
+    """get single doc"""
 
     doc = Document.query.get(id)
     return jsonify(doc_schema.dump(doc))
@@ -46,7 +50,9 @@ def doc_retrive(id, user=None):
 @jwt_required
 @auth_decorator
 def doc_update(id, user=None):
-    # update a document
+
+    """update a document"""
+
     doc_fields = doc_schema.load(request.json)
     
     docs = Document.query.filter_by(id=id, user_id=user.id)
@@ -63,7 +69,8 @@ def doc_update(id, user=None):
 @jwt_required
 @auth_decorator
 def doc_delete(id, user=None):
-    # delete a document
+    
+    """delete a document"""
 
     doc = Document.query.get(id)
     

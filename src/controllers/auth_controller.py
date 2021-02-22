@@ -11,8 +11,8 @@ auth = Blueprint("auth", __name__, url_prefix="/auth")
 def auth_register():
     user_fields = user_schema.load(request.json)
 
+    # checks if user already exists
     user = User.query.filter_by(username=user_fields["username"]).first()
-
     if user:
         return abort(400, description="Email already registered")
 
