@@ -11,13 +11,13 @@ auth = Blueprint("auth", __name__, url_prefix="/auth")
 def auth_register():
     user_fields = user_schema.load(request.json)
 
-    user = User.query.filter_by(email=user_fields["email"]).first()
+    user = User.query.filter_by(username=user_fields["username"]).first()
 
     if user:
         return abort(400, description="Email already registered")
 
     user = User()
-    user.email = user_fields["email"]
+    user.username = user_fields["username"]
     user.password = bcrypt.generate_password_hash(user_fields["password"]).decode("utf-8")
 
     db.session.add(user)
@@ -29,10 +29,10 @@ def auth_register():
 def auth_login():
     user_fields = user_schema.load(request.json)
 
-    user = User.query.filter_by(email=user_fields["email"]).first()
+    user = User.query.filter_by(username=user_fields["username"]).first()
 
     if not user or not bcrypt.check_password_hash(user.password, user_fields["password"]):
-        return abort(401, description="Incorrect email or password")
+        return abort(401, description="Incorrect username or password")
     
     access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
 

@@ -27,7 +27,7 @@ def seed_db():
 
     for i in range(5):
         user = User()
-        user.email = f"testuser{i}"
+        user.username = f"testuser{i}"
         user.password = bcrypt.generate_password_hash("testpasswd").decode("utf-8")
         db.session.add(user)
         users.append(user)
