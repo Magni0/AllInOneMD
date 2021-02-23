@@ -1,6 +1,6 @@
 from models.Authentication import User
 from schemas.UserSchema import user_schema
-from flask import Blueprint, request, jsonify, abort, redirect
+from flask import Blueprint, request, jsonify, abort, redirect, render_template, url_for
 from main import db, bcrypt
 from datetime import timedelta
 from flask_jwt_extended import create_access_token
@@ -10,36 +10,41 @@ auth = Blueprint("auth", __name__, url_prefix="/auth")
 
 @auth.route("/register", methods=["POST"])
 def auth_register():
-    user_fields = user_schema.load(request.json)
+    # user_fields = user_schema.load(request.json)
+    username = request.form.get("username")
+    password = request.form.get("password")
 
     # checks if user already exists
-    user = User.query.filter_by(username=user_fields["username"]).first()
+    user = User.query.filter_by(username=username).first()
     if user:
-        return abort(400, description="Email already registered")
+        return abort(400, description="username already taken")
 
     user = User()
-    user.username = user_fields["username"]
-    user.password = bcrypt.generate_password_hash(user_fields["password"]).decode("utf-8")
+    # user.username = user_fields["username"]
+    user.username = username
+    # user.password = bcrypt.generate_password_hash(user_fields["password"]).decode("utf-8")
+    user.password = bcrypt.generate_password_hash(password).decode("utf-8")
 
     db.session.add(user)
     db.session.commit()
 
-    return jsonify(user_schema.dump(user))
+    # return jsonify(user_schema.dump(user))
+    return redirect(url_for("auth.auth_login"))
 
 @auth.route("/login", methods=["GET"])
 def auth_login():
-    user_fields = user_schema.load(request.json)
+    # user_fields = user_schema.load(request.json)
 
     user = User.query.filter_by(username=user_fields["username"]).first()
 
     if not user or not bcrypt.check_password_hash(user.password, user_fields["password"]):
         return abort(401, description="Incorrect username or password")
     
-    access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
+    # access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
 
-    return jsonify({"token": access_token})
+    # return jsonify({"token": access_token})
 
-# @auth.route("/signout", methods=["GET"])
-# def auth_signout():
-#     logout_user()
-#     return redirect()
+@auth.route("/signout", methods=["GET"])
+def auth_signout():
+    logout_user()
+    return redirect()
