@@ -6,9 +6,9 @@ from datetime import timedelta
 from flask_jwt_extended import create_access_token
 from flask_login import login_required, login_user, logout_user, current_user
 
-auth = Blueprint("auth", __name__, url_prefix="/auth")
+auth = Blueprint("auth", __name__, url_prefix="/")
 
-@auth.route("/register", methods=["POST"])
+@auth.route("/auth/register", methods=["POST"])
 def auth_register():
     # user_fields = user_schema.load(request.json)
     username = request.form.get("username")
@@ -31,20 +31,33 @@ def auth_register():
     # return jsonify(user_schema.dump(user))
     return redirect(url_for("auth.auth_login"))
 
-@auth.route("/login", methods=["GET"])
+@auth.route("/auth/login", methods=["GET"])
 def auth_login():
     # user_fields = user_schema.load(request.json)
+    username = request.form.get("username")
+    password = request.form.get("password")
 
-    user = User.query.filter_by(username=user_fields["username"]).first()
+    user = User.query.filter_by(username=username).first()
 
-    if not user or not bcrypt.check_password_hash(user.password, user_fields["password"]):
+    if not user or not bcrypt.check_password_hash(user.password, password):
         return abort(401, description="Incorrect username or password")
     
+    login_user(user)
     # access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
 
     # return jsonify({"token": access_token})
+    return redirect(url_for("md.doc_index"))
 
 @auth.route("/signout", methods=["GET"])
-def auth_signout():
+@login_required
+def signout():
     logout_user()
-    return redirect()
+    return redirect("home.html")
+
+@auth.route("/signup", methods=["POST"])
+def signup():
+    return render_template("signup.html")
+
+@auth.route("/login", methods=["GET"])
+def login():
+    return render_template("login.html")
