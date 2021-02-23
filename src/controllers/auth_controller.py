@@ -1,9 +1,10 @@
 from models.Authentication import User
 from schemas.UserSchema import user_schema
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, jsonify, abort, redirect
 from main import db, bcrypt
 from datetime import timedelta
 from flask_jwt_extended import create_access_token
+from flask_login import login_required, login_user, logout_user, current_user
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -37,3 +38,8 @@ def auth_login():
     access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
 
     return jsonify({"token": access_token})
+
+# @auth.route("/signout", methods=["GET"])
+# def auth_signout():
+#     logout_user()
+#     return redirect()
