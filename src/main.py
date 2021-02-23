@@ -39,6 +39,11 @@ def create_app():
     jwt.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+    login_manager.login_view = "auth.login"
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return get_user(user_id)
 
     # imports Blueprint from commands.py to allow custom flask commands
     # custom commands are written in commands.py

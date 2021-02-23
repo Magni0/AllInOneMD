@@ -39,6 +39,7 @@ def auth_login():
 
     user = User.query.filter_by(username=username).first()
 
+    # cant log in
     if not user or not bcrypt.check_password_hash(user.password, password):
         return abort(401, description="Incorrect username or password")
     
@@ -56,7 +57,7 @@ def signout():
 
 @auth.route("/signup", methods=["POST"])
 def signup():
-    return render_template("signup.html")
+    return render_template("register.html")
 
 @auth.route("/login", methods=["GET"])
 def login():
