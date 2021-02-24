@@ -1,0 +1,592 @@
+commit 325e1e20f47af3121422c4a0d58afe90d120c249
+Merge: f11e2df b687238
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 19:12:29 2021 +1100
+
+    Merge branch 'login-refactor'
+
+commit b687238a85177fb870e18721c2a044338b4c919d
+Merge: 9fc37c0 b6938e0
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 19:10:23 2021 +1100
+
+    Merge branch 'login-refactor' of https://github.com/Magni0/AllInOneMD into login-refactor
+
+commit 9fc37c0964757b0daaf8e5f02040a7f1201dce98
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 18:58:24 2021 +1100
+
+    fixed a few syntax errors
+
+commit b6938e07d669e9d6d7849e8a9d4e4422583a02dc
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 18:58:24 2021 +1100
+
+    fixed a few syntax errors
+
+commit f11e2dfa6b3fd9133d669a25502248e99e1acde9
+Merge: afec0e3 d1f1b20
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 18:48:44 2021 +1100
+
+    Merge branch 'login-refactor'
+
+commit afec0e32dbdfe354fe968ee0c45f5f213650b33c
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 18:28:38 2021 +1100
+
+    filled doc-edit template
+
+commit 9a104ca53b425c6d3f2ea8b72444188f1a3551a0
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 18:20:23 2021 +1100
+
+    filled out doc-index template
+
+commit 902a463f9adda38ad5e2881dcf66dd07dbf714d4
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 18:11:04 2021 +1100
+
+    filled out home template
+
+commit d1f1b20fa78f358d26c8f41c671a0db13bdf8e62
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 17:57:36 2021 +1100
+
+    refactored auth_controller to use templates
+
+commit 4e0963cdf4a014a89e42f43ad69e85c4dca945c8
+Merge: d0ac3dd d5cb23e
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 17:46:31 2021 +1100
+
+    Merge branch 'html-templates' into login-refactor
+
+commit d5cb23ee03c0e79d9a230a99175940271e13b5d2
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 17:45:37 2021 +1100
+
+    filled out register template
+
+commit d0ac3dd38c8e72273e32952fc1d2a7403497e624
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 17:43:47 2021 +1100
+
+    refactord auth/register endpoint for forms
+
+commit d2a62e0116e318e1448437768bdadd014faf1216
+Merge: 67be7c5 a4b056e
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 17:32:26 2021 +1100
+
+    Merge branch 'html-templates' into login-refactor
+
+commit a4b056ef2a6773bae95c11c5942ac7b75c85455c
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 17:31:52 2021 +1100
+
+    filled base login template
+
+commit 67be7c5de2cda3f617b2be8eedee88475a694344
+Merge: e6c2794 00fd905
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 17:20:57 2021 +1100
+
+    Merge branch 'html-templates' into login-refactor
+
+commit e6c2794151e02ad3f4b72884a9674da8f39fbba8
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 16:48:42 2021 +1100
+
+    added logout endpoint, installed flask-login manager & imported dependencies for auth controller
+
+commit 00fd9053422d12691635cfc236fbe49c53c5f74f
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 16:12:24 2021 +1100
+
+    added standed html template to layout.html and inherited that to every other template
+
+commit 60f07d187e414f269c13bdb1372e7e68edaf4fa5
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Feb 23 15:59:36 2021 +1100
+
+    added base template files
+
+commit 3341abdb50d1e24976de2411c2a693d75cbc6e2e
+Merge: efde0ae 40264eb
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 18:05:39 2021 +1100
+
+    Merge branch 'documentation-updates'
+
+commit 40264eb9bb293ea5a0ed130646c3943de287e2ce
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 18:05:20 2021 +1100
+
+    added docstrings for doc_controller endpoints
+
+commit 0e36db869fb6d0c96291c8e8437eebb68cd5205d
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 18:03:28 2021 +1100
+
+    added internal documentation for auth_controller
+
+commit efde0aede3c8009b7e417023a2c6a0fa2396e7c4
+Merge: bea7dab 289885a
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 17:57:21 2021 +1100
+
+    Merge branch 'master' of https://github.com/Magni0/AllInOneMD
+
+commit bea7dab1f89d7555a32f4aa9f7931f3420d2231e
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 17:34:14 2021 +1100
+
+    added images for README
+
+commit 289885a8c55b46fa2772396c44cc20bf719a6df5
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 17:34:14 2021 +1100
+
+    added images for README
+
+commit 06e5c78f37c872032d196783f21f2d80796f3716
+Merge: 0c91516 823e866
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 17:09:42 2021 +1100
+
+    Merge branch 'master' of https://github.com/Magni0/AllInOneMD
+
+commit 0c915163fdc3d5ebb749563775ca33d238b17bdb
+Merge: 0738ba9 d339020
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 17:08:49 2021 +1100
+
+    Merge branch 'master' of https://github.com/Magni0/AllInOneMD
+
+commit 823e866073bbe6245d15b0040ba3d65a47170a8d
+Merge: 0738ba9 d339020
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 17:08:49 2021 +1100
+
+    Merge branch 'master' of https://github.com/Magni0/AllInOneMD
+
+commit 0738ba98f4c68a472ceaece89f2a98fdde534128
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 16:58:22 2021 +1100
+
+    fixed end of line error in CI.yml file
+
+commit d3390206f9c779716c49f4d8fea3ae52bb7107f5
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 16:58:22 2021 +1100
+
+    fixed end of line error in CI.yml file
+
+commit fee8d9a9f2ccde7010406454fbda837636278d47
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 16:53:06 2021 +1100
+
+    added internal documentation to commands.py
+
+commit 0d7ec8f1ae14335073a352ce5817fc2862b5acce
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 16:38:33 2021 +1100
+
+    updated migrations
+
+commit 7b945f587079c5a91c833c6cfd8ea6dffc866411
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 16:27:09 2021 +1100
+
+    made it so FLASK_ENV is read from .env
+
+commit 653650da5df264afbbb01cb3e830f1acdd7f7a4c
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 16:22:56 2021 +1100
+
+    added internal documentation for default_settings.py
+
+commit 6861eefba890d82bb96b22454ff133f85f4704ab
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 16:14:37 2021 +1100
+
+    added internal docummentation in log_handler.py
+
+commit 86737ab64be2832e11e00ed385c20601ec24591a
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 16:10:54 2021 +1100
+
+    added proper internal docummentation for main.py
+
+commit 799944ae04653448f86601c3a3e1a2466cc0e83e
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Feb 22 15:54:13 2021 +1100
+
+    removed img_controller.py, Images.py & ImageSchema.py & refactor code to acomodate the deletions & changed email to username
+
+commit f5a271d307c592bb066373b56de17ef937763e2a
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Jan 29 15:45:42 2021 +1100
+
+    made a series of small hotfixes
+
+commit e2964df6ac3e0521ec54cf6b2c5e6745ee54b3f8
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Wed Dec 2 18:28:15 2020 +1100
+
+    made code dryer by making authorization a decorator
+
+commit 85c1373860d7040000bd13854c0ad4eecbab82ce
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Wed Dec 2 14:33:29 2020 +1100
+
+    added ImageSchema
+
+commit 5138249dc80fea78aa2d36784abae4299ab4403d
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Wed Dec 2 14:02:44 2020 +1100
+
+    created relationship between documents and images & changed db 'username' column to 'email'
+
+commit 5ff6313ab7e52aea376ca824e049cc281ab3e0a6
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Wed Dec 2 13:42:36 2020 +1100
+
+    added authentication decorator for controllers (currently testing)
+
+commit b25c3ce4fcdf6c57524abd0e25918372a3d58ef4
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Wed Dec 2 13:07:13 2020 +1100
+
+    updated gitignore
+
+commit 6e0db78dd329c4d140ca409b2fe0067b1f083cdd
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Wed Dec 2 13:05:51 2020 +1100
+
+    added migrations
+
+commit 0cac085201cf500ab5e5a971e32c0eafcf68f8af
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Wed Dec 2 12:59:51 2020 +1100
+
+    updated requirements.txt and added image controller, model and schema
+
+commit 883f1f84945ad1e786633015962b7aa8f84e7a3d
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Nov 24 17:19:52 2020 +1100
+
+    added project Model, Schema & controller
+
+commit 035abb9fe119bd3e0cefd3d6e89264ba94fb91a4
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Nov 24 17:10:04 2020 +1100
+
+    fixed nested user dict not being in response
+
+commit f7a13ef86ae81306ce6e768767c48832be9b1e18
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Nov 24 16:59:08 2020 +1100
+
+    changed class Authentication to User
+
+commit f12e837ff14fa654d51b442bc559a377464aa79b
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Nov 19 14:54:22 2020 +1100
+
+    added logging for production enviroment
+
+commit 3f9734e0e6e85b926dea9b794962f05e14a3498b
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Nov 17 18:40:08 2020 +1100
+
+    updated document controller, error note: nested user is not showing
+
+commit 92fc8355419ed2fabf75340e31287ac596a1813e
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Nov 17 18:32:39 2020 +1100
+
+    added autherization
+
+commit 3b0b179dba2d8c4a6e3384ead87e5ca8744eaa30
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Nov 17 17:38:21 2020 +1100
+
+    auth/login endpoint now returns JWT
+
+commit 5d871b259f43da0080b903f1e415007a85094322
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Tue Nov 17 15:23:12 2020 +1100
+
+    added authentication
+
+commit fd96bc6d2497ec05b22e2ae73702f419e3e6364f
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 23:11:36 2020 +1100
+
+    added tests for documents create_doc, retrive_single_doc and delete_doc
+
+commit af26491b099e669698e26e567489bec4ede1f251
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 22:44:22 2020 +1100
+
+    edited CI.yml file
+
+commit 9178769d3215893b3bd25ea3769845288da2442d
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 22:42:52 2020 +1100
+
+    added command to CI.yml
+
+commit 36616df875aa18fd5b6dc737f8119e5559c7361c
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 22:29:05 2020 +1100
+
+    changed import path of main for tests
+
+commit 9efb5940b7a10dd953b59379971a5308cf72e776
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 22:24:25 2020 +1100
+
+    update CI test path
+
+commit d7559a250863896bbdd34c8a2f9d23c17d773ef5
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 22:23:11 2020 +1100
+
+    update CI test path
+
+commit 0d4e15cef5a2ed57a653f80db0b9b8ede5a5764f
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 22:21:08 2020 +1100
+
+    added testing
+
+commit 594f740bf32c0349ebda6c272fc522d17607ea21
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 21:21:18 2020 +1100
+
+    added database create tables, delete tables and seed tables commands
+
+commit 07abb0e528c5f3d18bc9d264f73186e45a267c0d
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 21:05:02 2020 +1100
+
+    added configuration
+
+commit d169a8e59e44efb4f4aeccbc1411a2b4232a6a78
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 13:03:35 2020 +1100
+
+    updated requirements.txt
+
+commit 5d677fb545235685baf0759cf82f193e8238c4c7
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 16 12:47:54 2020 +1100
+
+    added better configuration but did not fix circular import error
+
+commit 506c969300f372694e34a962236d39ee7e39c103
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Nov 13 19:24:10 2020 +1100
+
+    updated readme with database relationships
+
+commit 91156f3b5242bd0a89f025b9d4933ef69dcc0f16
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Nov 13 19:16:07 2020 +1100
+
+    added database schema to readme
+
+commit 1b328612e6c40cc8083c3ba4ee59150eda392b41
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Nov 12 20:29:13 2020 +1100
+
+    added models, schemas and updated doc_controller
+
+commit c29c11528c7ce5cf3a68bf3876f52bc930bd9c0d
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Nov 12 19:37:52 2020 +1100
+
+    added part of MVC
+
+commit 2c1fec2f7d62afbaf4871762b71066185cf57fbf
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Nov 12 18:49:31 2020 +1100
+
+    added blueprint to md crud
+
+commit 11a29b475e9093a5d095683a38700585b8747e8b
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 9 15:17:51 2020 +1100
+
+    adjusted tests
+
+commit 79ffa8dbc940209e05d3358b986af25f2fca5531
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 9 15:01:01 2020 +1100
+
+    added logic to doc_delete function
+
+commit 83dbd1e80e31d0e9d93d8b5da299a1d90cfaf0e2
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 9 14:58:12 2020 +1100
+
+    added logic to doc_retrive function
+
+commit 8df3ff0edf53d7bd3b880134bbdc1cc3a53ce1c3
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 9 14:55:49 2020 +1100
+
+    added logic to doc_create function
+
+commit 329a7bec75e03cd6cf3dc401ad347731f994e895
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 9 14:54:21 2020 +1100
+
+    added logic to doc_index function
+
+commit e154e30a9865cb730d8b5d73e80fb4332ff181a0
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 9 14:51:24 2020 +1100
+
+    updated requirements.txt
+
+commit c5b8b6c2af588c0e229ac36bc4e252d2650a6ded
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 9 14:41:53 2020 +1100
+
+    added databse connection
+
+commit d13aa705cc3cea705c4a60fa70307ab395a2f8cd
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 9 14:12:25 2020 +1100
+
+    added routes for crud resource
+
+commit 6d73330bfb66c57e4454787ee61e0763d45c98d7
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 9 11:50:07 2020 +1100
+
+    updated file structure
+
+commit c033eaf99837ca3b16f7cce00309ffeb13ed4f38
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Nov 5 17:34:56 2020 +1100
+
+    updated endpoint documentation
+
+commit 30c381dd295c10108721c7af180beed718998dca
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Nov 5 09:38:53 2020 +1100
+
+    updated readme file
+
+commit 6a659ab78f5cf1d9f694c709ea29cb76d0d3e6b5
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Nov 5 09:37:05 2020 +1100
+
+    updated readme file
+
+commit f0acb6a74b9ffcfde4efbc0944309347769ead51
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Nov 5 09:34:06 2020 +1100
+
+    updated readme file
+
+commit ce1f49b23fec9d51c88a7ae8f346ef0344f162e5
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Mon Nov 2 17:46:31 2020 +1100
+
+    added endpoint documentation
+
+commit 7da2c37b9d4355e7c4dcf3771cace1212f27587a
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Sun Nov 1 14:00:01 2020 +1100
+
+    added database schema
+
+commit 6d245f35f189a2b80f732d66d009d43f3012d79a
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Oct 23 15:58:18 2020 +1100
+
+    fixed test
+
+commit 7031e0304958e23ddb8cdae8fb25e69b87808946
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Oct 23 15:56:47 2020 +1100
+
+    hopfully fixed CI
+
+commit d1d9bb6e100b3fcc14fe427f8ce00bd1b1fa6359
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Oct 23 15:55:04 2020 +1100
+
+    hopfully fixed CI
+
+commit f37d46cc0a65e49c7e42b3215b1cc3b0a3e082a1
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Oct 23 15:53:28 2020 +1100
+
+    hopfully fixed CI
+
+commit b2ca8cdda1a53efbcf90e0ce1c96222103470797
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Oct 23 15:52:34 2020 +1100
+
+    hopfully fixed CI
+
+commit 961be6bc3d35da85e26bf965175f0c87f3e64537
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Oct 23 15:51:19 2020 +1100
+
+    hopfully fixed CI
+
+commit 2dbecce43c9cdff90eb47b3668278661e7eec594
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Oct 23 15:48:38 2020 +1100
+
+    added test test
+
+commit 2d9278003404fa16b3e0dd8ad9f556c0d337f877
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Oct 23 15:42:13 2020 +1100
+
+    fixed CI
+
+commit 636e85765180385209aed90a36588a35f5716330
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Fri Oct 23 15:40:32 2020 +1100
+
+    added CI
+
+commit 7f78d48adf752c0b36b9034027ef0c6118f1d40e
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Oct 22 18:07:18 2020 +1100
+
+    added installation instructions in readme
+
+commit 3cec152e6e35f652db38d6b3864b16e2da0096a5
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Oct 22 10:07:40 2020 +1100
+
+    added requirements.txt and update .gitignore
+
+commit eb3b54733fcc4c7006690eab8b289cd9c69755fe
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Oct 22 09:31:02 2020 +1100
+
+    updated readme
+
+commit 1df0909970eda52d6bbd43f20dd7a91210b7591b
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Oct 22 09:27:30 2020 +1100
+
+    changed png path
+
+commit 14b47d2eef467f1c1456dda417929b7720384f31
+Author: Logan Harris <loganrodharris@gmail.com>
+Date:   Thu Oct 22 09:25:24 2020 +1100
+
+    added description and wireframes
