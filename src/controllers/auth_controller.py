@@ -48,7 +48,7 @@ def signout():
     logout_user()
     return redirect("home.html")
 
-@auth.route("/signup", methods=["POST"])
+@auth.route("/signup", methods=["GET"])
 def signup():
     return render_template("register.html")
 
