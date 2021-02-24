@@ -1,10 +1,10 @@
-{& extends 'layout.html' %}
+{% extends 'layout.html' %}
 
-{% content block %}
+{% block content %}
     <div>
         <h3>Login</h3>
         <div>
-            <form action="{{ url_for('auth.auth_login') }}" method="GET">
+            <form action="{{ url_for('auth.auth_login') }}" method="POST">
                 <input type="text" name="username" placeholder="Username" autofocus="">
                 <input type="password" name="password" placeholder="Password">
                 <button>Login</button>
@@ -12,4 +12,4 @@
         </div>
         <a href="index.html"><button>Cancel</button></a>
     </div>
-{% end block %}
+{% endblock %}

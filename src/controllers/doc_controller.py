@@ -5,11 +5,14 @@ from schemas.DocSchema import doc_schema, docs_schema
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 from services.decorators import auth_decorator
+from flask_login import login_required
+
 md = Blueprint('document', __name__, url_prefix="/document")
 
 @md.route("/", methods=["GET"])
-@jwt_required
-@auth_decorator
+# @jwt_required
+# @auth_decorator
+@login_required
 def doc_index(user=None):
     
     """reterive all md documents"""
