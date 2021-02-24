@@ -3,7 +3,7 @@
 {% block content %}
     <h2>{{ doc.docname }}</h2>
     <div>
-        <form action="{{ url_for('md.doc_update') }}">
+        <form action="{{ url_for('document.doc_update') }}">
             <textarea name="document" cols="30" rows="10"></textarea>
             <button>Save Changes</button>
             <button>Discard Changes</button>
