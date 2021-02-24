@@ -20,34 +20,27 @@ def auth_register():
         return abort(400, description="username already taken")
 
     user = User()
-    # user.username = user_fields["username"]
     user.username = username
-    # user.password = bcrypt.generate_password_hash(user_fields["password"]).decode("utf-8")
     user.password = bcrypt.generate_password_hash(password).decode("utf-8")
 
     db.session.add(user)
     db.session.commit()
 
-    # return jsonify(user_schema.dump(user))
-    return redirect(url_for("auth.auth_login"))
+    return redirect(url_for("auth.login"))
 
-@auth.route("/auth/login", methods=["GET"])
+@auth.route("/auth/login", methods=["POST"])
 def auth_login():
-    # user_fields = user_schema.load(request.json)
     username = request.form.get("username")
     password = request.form.get("password")
 
     user = User.query.filter_by(username=username).first()
 
-    # cant log in
     if not user or not bcrypt.check_password_hash(user.password, password):
         return abort(401, description="Incorrect username or password")
-    
-    login_user(user)
-    # access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
 
-    # return jsonify({"token": access_token})
-    return redirect(url_for("md.doc_index"))
+    login_user(user)
+
+    return redirect(url_for("document.doc_index"))
 
 @auth.route("/signout", methods=["GET"])
 @login_required
