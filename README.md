@@ -1,5 +1,7 @@
 # T4A2-A
 
+[Git Repo](https://github.com/Magni0/AllInOneMD)
+
 ## R1
 
 The purpose of this web application is to centralize the process of documentation with markdown files and to act as temporary cloud storage for such documentation as well. The web app must be able to:
