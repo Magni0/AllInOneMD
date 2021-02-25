@@ -3,10 +3,13 @@ from schemas.UserSchema import user_schema
 from flask import Blueprint, request, jsonify, abort, redirect, render_template, url_for
 from main import db, bcrypt
 from datetime import timedelta
-from flask_jwt_extended import create_access_token
 from flask_login import login_required, login_user, logout_user, current_user
 
-auth = Blueprint("auth", __name__, url_prefix="/")
+auth = Blueprint("auth", __name__)
+
+@auth.route("/", methods=["GET"])
+def home():
+    return render_template("index.html")
 
 @auth.route("/auth/register", methods=["POST"])
 def auth_register():
@@ -20,20 +23,16 @@ def auth_register():
         return abort(400, description="username already taken")
 
     user = User()
-    # user.username = user_fields["username"]
     user.username = username
-    # user.password = bcrypt.generate_password_hash(user_fields["password"]).decode("utf-8")
     user.password = bcrypt.generate_password_hash(password).decode("utf-8")
 
     db.session.add(user)
     db.session.commit()
 
-    # return jsonify(user_schema.dump(user))
-    return redirect(url_for("auth.auth_login"))
+    return redirect(url_for("auth.login"))
 
-@auth.route("/auth/login", methods=["GET"])
+@auth.route("/auth/login", methods=["POST"])
 def auth_login():
-    # user_fields = user_schema.load(request.json)
     username = request.form.get("username")
     password = request.form.get("password")
 
@@ -41,22 +40,23 @@ def auth_login():
 
     if not user or not bcrypt.check_password_hash(user.password, password):
         return abort(401, description="Incorrect username or password")
-    
-    login_user(user)
-    # access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
 
-    # return jsonify({"token": access_token})
-    return redirect(url_for("md.doc_index"))
+    if request.form.get("remember"):
+        login_user(user, remember=True, duration=timedelta(days=10))
+    else:
+        login_user(user)
+
+    return redirect(url_for("document.doc_index"))
 
 @auth.route("/signout", methods=["GET"])
 @login_required
 def signout():
     logout_user()
-    return redirect("home.html")
+    return redirect(url_for("auth.home"))
 
-@auth.route("/signup", methods=["POST"])
+@auth.route("/signup", methods=["GET"])
 def signup():
-    return render_template("signup.html")
+    return render_template("register.html")
 
 @auth.route("/login", methods=["GET"])
 def login():

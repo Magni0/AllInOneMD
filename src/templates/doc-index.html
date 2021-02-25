@@ -1,1 +1,24 @@
 {& extends 'layout.html' %}
+
+{% block content %}
+    <h3>Your Documents</h3>
+    <div>
+        <a href="">
+            <button>Create new file</button>
+        </a>
+    </div>
+    <div>
+        {% for doc in docs}
+            <div>{{ doc.docname }}</div>
+            <a href="">
+                <button>Edit</button>
+            </a>
+            <a href="">
+                <button>Convert & Download</button>
+            </a>
+            <a href="">
+                <button>Delete</button>
+            </a>
+        {% endfor %}
+    </div>
+{% end block %}

@@ -1,6 +1,6 @@
-# T4A2-A
+# All In One MD
 
-## R1
+[Git Repo](https://github.com/Magni0/AllInOneMD)
 
 The purpose of this web application is to centralize the process of documentation with markdown files and to act as temporary cloud storage for such documentation as well. The web app must be able to:
 
@@ -16,21 +16,21 @@ The primary audience of this web app are students of a field in IT and people in
 - NGINX
 - Gunicorn
 
-## R2
+## DataFlow Diagram
 
 ![R2 DataFlowDiagram](docs/DataFlowDiagram.png)
 
-## R3
+## Application Architecture Diagram
 
 ![R3 Application Architecture Diagram](docs/AAD.png)
 
-## R4
+## User Stories
 
 As a computer science student I want to store my documentation remotely so I can retrieve it whenever or wherever I want to.
 
 As a software engineer I want to make edits to my technical documentation as I change the software.
 
-## R5
+## Wireframes
 
 ![Landing Page](docs/Landing-Page.png)
 ![Register Page](docs/Register-Page.png)
@@ -38,7 +38,7 @@ As a software engineer I want to make edits to my technical documentation as I c
 ![MD File Index Page](docs/MD-File-Index-Page.png)
 ![MD File Edit Page](docs/MD-File-Edit-Page.png)
 
-## R6
+## Planning Process Project Management
 
 ![Trello-1](docs/Trello-1.png)
 ![Trello-2](docs/Trello-2.png)
