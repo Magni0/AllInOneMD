@@ -37,7 +37,10 @@ def auth_login():
     if not user or not bcrypt.check_password_hash(user.password, password):
         return abort(401, description="Incorrect username or password")
 
-    login_user(user)
+    if request.form.get("remember"):
+        login_user(user, remember=True, duration=timedelta(days=10))
+    else:
+        login_user(user)
 
     return redirect(url_for("document.doc_index"))
 
@@ -45,7 +48,7 @@ def auth_login():
 @login_required
 def signout():
     logout_user()
-    return redirect("home.html")
+    return redirect(url_for("auth.home"))
 
 @auth.route("/signup", methods=["GET"])
 def signup():
@@ -54,3 +57,7 @@ def signup():
 @auth.route("/login", methods=["GET"])
 def login():
     return render_template("login.html")
+
+@auth.route("/home", methods=["GET"])
+def home():
+    return render_template("index.html")
