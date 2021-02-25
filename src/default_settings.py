@@ -6,6 +6,7 @@ class Config(object):
     """
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = os.environ.get("SECRET_KEY")
 
     @property
     def SQLALCHEMY_DATABASE_URI(self):
@@ -26,7 +27,6 @@ class DevelopmentConfig(Config):
     """
 
     DEBUG = True
-    TEST_SECRET_KEY = os.environ.get("TEST_SECRET_KEY")
 
     @property
     def TEST_SECRET_KEY(self):
@@ -34,20 +34,17 @@ class DevelopmentConfig(Config):
         """gets SECRET_KEY from .env
         """
 
-        value = TEST_SECRET_KEY
+        value = os.environ.get("TEST_SECRET_KEY")
 
         if not value:
             raise ValueError("TEST_SECRET_KEY is not set")
-        
+
         return value
 
 class ProductionConfig(Config):
 
     """applies config for production enviroment
     """
-
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-
 
     @property
     def SECRET_KEY(self):
