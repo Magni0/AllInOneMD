@@ -29,15 +29,15 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
     @property
-    def TEST_SECRET_KEY(self):
+    def DEV_SECRET_KEY(self):
         
-        """gets SECRET_KEY from .env
+        """gets DEV_SECRET_KEY from .env
         """
 
-        value = os.environ.get("TEST_SECRET_KEY")
+        value = os.environ.get("DEV_SECRET_KEY")
 
         if not value:
-            raise ValueError("TEST_SECRET_KEY is not set")
+            raise ValueError("DEV_SECRET_KEY is not set")
 
         return value
 
