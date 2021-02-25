@@ -61,7 +61,3 @@ def signup():
 @auth.route("/login", methods=["GET"])
 def login():
     return render_template("login.html")
-
-@auth.route("/home", methods=["GET"])
-def home():
-    return render_template("index.html")
