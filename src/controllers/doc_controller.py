@@ -3,7 +3,6 @@ from models.Authentication import User
 from main import db
 from schemas.DocSchema import doc_schema, docs_schema
 from flask import Blueprint, request, jsonify
-from services.decorators import auth_decorator
 from flask_login import login_required
 
 md = Blueprint('document', __name__, url_prefix="/document")
