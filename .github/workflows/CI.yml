@@ -30,7 +30,6 @@ jobs:
           sleep 10s
           export DB_URI=postgresql+psycopg2://mddbadmin:password@localhost:5432/allinonemd
           export SECRET_KEY=testkey
-          export DEV_SECRET_KEY=testdevkey
           export FLASK_APP="main:create_app()"
           export FLASK_ENV=development
           python -m unittest discover -s tests -v

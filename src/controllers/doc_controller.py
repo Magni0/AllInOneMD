@@ -9,19 +9,19 @@ md = Blueprint('document', __name__, url_prefix="/document")
 
 @md.route("/", methods=["GET"])
 @login_required
-def doc_index(user=None):
+def doc_index():
     
-    """reterive all md documents"""
-    
+    """reterive all md documents from database (not files)"""
+
     pass
     # docs = Document.query.all()
     # return jsonify(docs_schema.dump(docs))
 
 @md.route("/", methods=["POST"])
 @login_required
-def doc_create(user=None):
+def doc_create():
     
-    """create new doc"""
+    """create new md file"""
 
     pass
     # doc_fields = doc_schema.load(request.json)
@@ -38,38 +38,38 @@ def doc_create(user=None):
 
 @md.route("/<int:id>", methods=["GET"])
 @login_required
-def doc_retrive(id, user=None):
+def doc_retrive(id):
     
-    """get single doc"""
+    """get md file"""
 
     pass
     # doc = Document.query.get(id)
     # return jsonify(doc_schema.dump(doc))
 
-@md.route("/<int:id>", methods=["PUT", "PATCH"])
-@login_required
-def doc_update(id, user=None):
+# @md.route("/<int:id>", methods=["PUT", "PATCH"])
+# @login_required
+# def doc_update(id):
 
-    """update a document"""
+#     """update a document"""
 
-    pass
-    # doc_fields = doc_schema.load(request.json)
+#     pass
+#     # doc_fields = doc_schema.load(request.json)
     
-    # docs = Document.query.filter_by(id=id, user_id=user.id)
+#     # docs = Document.query.filter_by(id=id, user_id=user.id)
     
-    # if docs.count() != 1:
-    #     return abort(401, description="Unauthorized to update this document")
+#     # if docs.count() != 1:
+#     #     return abort(401, description="Unauthorized to update this document")
 
-    # docs.update(doc_fields)
-    # db.session.commit()
+#     # docs.update(doc_fields)
+#     # db.session.commit()
 
-    # return jsonify(doc_schema.dump(docs[0]))
+#     # return jsonify(doc_schema.dump(docs[0]))
 
 @md.route("/<int:id>", methods=["DELETE"])
 @login_required
-def doc_delete(id, user=None):
+def doc_delete(id):
     
-    """delete a document"""
+    """delete a md file"""
 
     pass
     # doc = Document.query.get(id)
