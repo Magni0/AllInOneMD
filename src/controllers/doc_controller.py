@@ -3,15 +3,12 @@ from models.Authentication import User
 from main import db
 from schemas.DocSchema import doc_schema, docs_schema
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required
 from services.decorators import auth_decorator
 from flask_login import login_required
 
 md = Blueprint('document', __name__, url_prefix="/document")
 
 @md.route("/", methods=["GET"])
-# @jwt_required
-# @auth_decorator
 @login_required
 def doc_index(user=None):
     
@@ -21,8 +18,7 @@ def doc_index(user=None):
     return jsonify(docs_schema.dump(docs))
 
 @md.route("/", methods=["POST"])
-@jwt_required
-@auth_decorator
+@login_required
 def doc_create(user=None):
     
     """create new doc"""
@@ -40,8 +36,7 @@ def doc_create(user=None):
     return jsonify(doc_schema.dump(new_doc))
 
 @md.route("/<int:id>", methods=["GET"])
-@jwt_required
-@auth_decorator
+@login_required
 def doc_retrive(id, user=None):
     
     """get single doc"""
@@ -50,8 +45,7 @@ def doc_retrive(id, user=None):
     return jsonify(doc_schema.dump(doc))
 
 @md.route("/<int:id>", methods=["PUT", "PATCH"])
-@jwt_required
-@auth_decorator
+@login_required
 def doc_update(id, user=None):
 
     """update a document"""
@@ -69,8 +63,7 @@ def doc_update(id, user=None):
     return jsonify(doc_schema.dump(docs[0]))
 
 @md.route("/<int:id>", methods=["DELETE"])
-@jwt_required
-@auth_decorator
+@login_required
 def doc_delete(id, user=None):
     
     """delete a document"""

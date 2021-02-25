@@ -3,7 +3,6 @@ from schemas.UserSchema import user_schema
 from flask import Blueprint, request, jsonify, abort, redirect, render_template, url_for
 from main import db, bcrypt
 from datetime import timedelta
-from flask_jwt_extended import create_access_token
 from flask_login import login_required, login_user, logout_user, current_user
 
 auth = Blueprint("auth", __name__, url_prefix="/")
