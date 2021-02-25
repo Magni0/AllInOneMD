@@ -5,7 +5,11 @@ from main import db, bcrypt
 from datetime import timedelta
 from flask_login import login_required, login_user, logout_user, current_user
 
-auth = Blueprint("auth", __name__, url_prefix="/")
+auth = Blueprint("auth", __name__)
+
+@auth.route("/", methods=["GET"])
+def home():
+    return render_template("index.html")
 
 @auth.route("/auth/register", methods=["POST"])
 def auth_register():
@@ -37,7 +41,10 @@ def auth_login():
     if not user or not bcrypt.check_password_hash(user.password, password):
         return abort(401, description="Incorrect username or password")
 
-    login_user(user)
+    if request.form.get("remember"):
+        login_user(user, remember=True, duration=timedelta(days=10))
+    else:
+        login_user(user)
 
     return redirect(url_for("document.doc_index"))
 
@@ -45,7 +52,7 @@ def auth_login():
 @login_required
 def signout():
     logout_user()
-    return redirect("home.html")
+    return redirect(url_for("auth.home"))
 
 @auth.route("/signup", methods=["GET"])
 def signup():
