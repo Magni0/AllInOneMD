@@ -1,12 +1,12 @@
-{& extends 'layout.html' %}
+{% extends 'layout.html' %}
 
 {% block content %}
     <h2>{{ doc.docname }}</h2>
     <div>
-        <form action="{{ url_for('document.doc_update') }}">
+        <form action="{{ url_for('document.doc_upload') }}">
             <textarea name="document" cols="30" rows="10"></textarea>
             <button>Save Changes</button>
             <button>Discard Changes</button>
         </form>
     </div>
-{% end block %}
+{% endblock %}

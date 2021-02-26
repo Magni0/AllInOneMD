@@ -7,7 +7,7 @@ from flask_login import login_required, current_user
 
 md = Blueprint('document', __name__, url_prefix="/document")
 
-@md.route("/", methods=["GET"])
+@md.route("/index", methods=["GET"])
 @login_required
 def doc_index():
     
@@ -18,7 +18,7 @@ def doc_index():
     # docs = Document.query.all()
     # return jsonify(docs_schema.dump(docs))
 
-@md.route("/", methods=["POST"])
+@md.route("/create", methods=["POST"])
 @login_required
 def doc_create():
     
@@ -37,13 +37,15 @@ def doc_create():
     
     # return jsonify(doc_schema.dump(new_doc))
 
-@md.route("/<int:id>", methods=["GET"])
+@md.route("/retrive/<int:id>", methods=["GET"])
 @login_required
 def doc_retrive(id):
     
     """get md file"""
 
     pass
+    # return render_template("doc-edit.html", content=content)
+
     # doc = Document.query.get(id)
     # return jsonify(doc_schema.dump(doc))
 
@@ -66,13 +68,15 @@ def doc_retrive(id):
 
 #     # return jsonify(doc_schema.dump(docs[0]))
 
-@md.route("/<int:id>", methods=["DELETE"])
+@md.route("/delete/<int:id>", methods=["DELETE"])
 @login_required
 def doc_delete(id):
     
     """delete a md file"""
 
     pass
+    return redirect(url_for("document.doc_index"))
+
     # doc = Document.query.get(id)
     
     # if not doc:
@@ -83,3 +87,10 @@ def doc_delete(id):
 
     # return jsonify(doc_schema.dump(doc))
 
+@md.route("/upload/<int:id>", methods=["POST"])
+@login_required
+def doc_upload():
+    
+    """uploads an edited md file to s3 bucket"""
+
+    pass
