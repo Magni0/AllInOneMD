@@ -3,7 +3,7 @@ from models.Authentication import User
 from main import db
 from schemas.DocSchema import doc_schema, docs_schema
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 md = Blueprint('document', __name__, url_prefix="/document")
 
@@ -13,7 +13,7 @@ def doc_index():
     
     """reterive all md documents from database (not files)"""
 
-    docs = Document.query.filter_by(user_id=User.id)
+    docs = Document.query.filter_by(user_id=current_user.get_id())
     return render_template("doc-index.html", docs=docs)
     # docs = Document.query.all()
     # return jsonify(docs_schema.dump(docs))
