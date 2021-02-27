@@ -2,7 +2,7 @@ from models.Document import Document
 from models.Authentication import User
 from main import db
 from schemas.DocSchema import doc_schema, docs_schema
-from flask import Blueprint, request, jsonify, render_template, redirect, url_for
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for, abort
 from flask_login import login_required, current_user
 
 md = Blueprint('document', __name__, url_prefix="/document")
@@ -24,7 +24,32 @@ def doc_create():
     
     """create new md file"""
 
-    pass
+    # Creates new file in temp_file_storage dir with name from template
+    file_name = request.form.get("file_name")
+    with open(f"temp_file_storage/{file_name}-{current_user.get_id()}.md", "x"):
+        pass
+    
+    # if the query fails the document doesnt exist
+    try:
+        if Document.query.filter_by(docname=f"{file_name}-{current_user.get_id()}.md"):
+            return abort(400, description="file name taken")
+    except:
+        pass
+
+    # creates a new record with the file name and the current user id
+    document = Document()
+    document.docname = file_name
+    document.user_id = current_user.get_id()
+
+    db.session.add(document)
+    db.session.commit()
+
+    filename = file_name.split("-")
+
+    return render_template("doc-edit.html", file_name=filename[0])
+
+    # ---------------------------------------------------------------
+
     # doc_fields = doc_schema.load(request.json)
 
     # new_doc = Document()
@@ -41,7 +66,7 @@ def doc_create():
 @login_required
 def doc_retrive(id):
     
-    """get md file"""
+    """get md file to edit"""
 
     pass
     # return render_template("doc-edit.html", content=content)
