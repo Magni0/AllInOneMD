@@ -24,16 +24,17 @@ def doc_create():
     
     """create new md file"""
 
-    # Creates new file in temp_file_storage dir with name from template
     file_name = request.form.get("file_name")
-    with open(f"temp_file_storage/{file_name}-{current_user.get_id()}.md", "x"):
-        pass
-    
+
     # if the query fails the document doesnt exist
     try:
         if Document.query.filter_by(docname=f"{file_name}-{current_user.get_id()}.md"):
             return abort(400, description="file name taken")
     except:
+        pass
+
+    # Creates new file in temp_file_storage dir with name from template
+    with open(f"temp_file_storage/{file_name}-{current_user.get_id()}.md", "x"):
         pass
 
     # creates a new record with the file name and the current user id
