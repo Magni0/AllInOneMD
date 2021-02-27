@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <h2>{{ doc.docname }}</h2>
+    <h2>{{ file_name }}</h2>
     <div>
         <form action="{{ url_for('document.doc_upload') }}">
             <textarea name="document" cols="30" rows="10"></textarea>
-            <button>Save Changes</button>
-            <button>Discard Changes</button>
+            <button name="save">Save Changes</button>
+            <button name="discard">Discard Changes</button>
         </form>
     </div>
 {% endblock %}

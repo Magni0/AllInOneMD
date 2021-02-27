@@ -4,21 +4,21 @@
     <h3>Your Documents</h3>
     <div>
         <h3>Create New MD File</h3>
-        <form action="{{ url_for(document.doc_create) }}" method="post">
+        <form action="{{ url_for('document.doc_create') }}" method="post">
             <input type="text" name="file_name" placeholder="File Name">
             <button>Create</button>
         </form>
     </div>
     <div>
-        {% for doc in docs}
+        {% for doc in docs %}
             <div>{{ doc.docname }}</div>
-            <a href="{{ url_for(document.doc_retrive, id={{ doc.id }}) }}">
+            <a href="{{ url_for('document.doc_retrive', id=doc.id) }}">
                 <button>Edit</button>
             </a>
             <a href="">
                 <button>Convert & Download</button>
             </a>
-            <a href="{{ url_for(document.doc_delete, id={{ doc.id }}) }}">
+            <a href="{{ url_for('document.doc_delete', id=doc.id) }}">
                 <button>Delete</button>
             </a>
         {% endfor %}

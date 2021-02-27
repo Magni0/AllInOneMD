@@ -46,7 +46,7 @@ def doc_create():
 
     filename = file_name.split("-")
 
-    return render_template("doc-edit.html", file_name=filename[0])
+    return render_template("doc-edit.html", file_name=filename[0], id=current_user.get_id())
 
     # ---------------------------------------------------------------
 
@@ -112,7 +112,7 @@ def doc_delete(id):
 
     # return jsonify(doc_schema.dump(doc))
 
-@md.route("/upload/<int:id>", methods=["POST"])
+@md.route("/upload", methods=["GET"])
 @login_required
 def doc_upload():
     
