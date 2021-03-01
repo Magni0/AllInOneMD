@@ -51,8 +51,15 @@ def doc_edit(id):
     
     """get md file to edit"""
 
-    pass
-    # return render_template("doc-edit.html", content=content)
+    document = Document.query.filter_by(id=id).first()
+
+    # place code to get file from s3 bucket here
+
+    # opens and reads contents in file in temp_file_storage
+    with open(f"temp_file_storage/{document.docname}.md", "r") as file:
+        content = file.read()
+
+    return render_template("doc-edit.html", content=content, file_name=document.docname)
 
 @md.route("/delete/<int:id>", methods=["GET"])
 @login_required
@@ -81,6 +88,8 @@ def doc_discard():
     
     """discards changes made in the doc-edit template"""
 
+    # uncomment once s3 bucket implemented
+    # os.remove(f"temp_file_storage/{document.docname}.md")
     return redirect(url_for("document.doc_index"))
 
 @md.route("/save", methods=["POST"])
@@ -90,6 +99,15 @@ def doc_save():
     """updates file in s3 bucket"""
 
     pass
+    content_to_save = request.form.get("content")
+
+    # with open() 
+
+    # place code to upload file to s3 bucket here
+
+    #uncomment once s3 bucket implemented
+    # os.remove(f"temp_file_storage/{document.docname}.md")
+    return redirect(url_for("document.doc_index"))
 
 @md.route("/convert/<int:id>", methods=["GET"])
 @login_required
