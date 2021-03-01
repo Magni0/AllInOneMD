@@ -26,12 +26,15 @@ def doc_create():
 
     file_name = request.form.get("file_name")
 
+    # exeption wont work with s3 bucket nedd to refactor
     # Creates new file in temp_file_storage dir with name from template
     try:
-        with open(f"temp_file_storage/{file_name}-{current_user.get_id()}.md", "x"):
+        with open(f"temp_file_storage/{file_name}.md", "x"):
             pass
     except FileExistsError:
         return abort(400, description="File already exists")
+
+    # need to send file to s3 bucket here
 
     # creates a new record with the file name and the current user id
     document = Document()
@@ -41,9 +44,7 @@ def doc_create():
     db.session.add(document)
     db.session.commit()
 
-    filename = file_name.split("-")
-
-    return render_template("doc-edit.html", file_name=filename[0])
+    return render_template("doc-edit.html", file_name=file_name)
 
     # ---------------------------------------------------------------
 
@@ -59,9 +60,9 @@ def doc_create():
     
     # return jsonify(doc_schema.dump(new_doc))
 
-@md.route("/retrive/<int:id>", methods=["GET"])
+@md.route("/edit/<int:id>", methods=["GET"])
 @login_required
-def doc_retrive(id):
+def doc_edit(id):
     
     """get md file to edit"""
 
