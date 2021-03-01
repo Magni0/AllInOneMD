@@ -12,13 +12,13 @@
     <div>
         {% for doc in docs %}
             <div>{{ doc.docname }}</div>
-            <a href="{{ url_for('document.doc_retrive', id=doc.id, file_name=doc.docname) }}">
+            <a href="{{ url_for('document.doc_edit', id=doc.id) }}">
                 <button>Edit</button>
             </a>
             <a href="">
                 <button>Convert & Download</button>
             </a>
-            <a href="{{ url_for('document.doc_delete', id=doc.id, file_name=doc.docname) }}">
+            <a href="{{ url_for('document.doc_delete', id=doc.id) }}">
                 <button>Delete</button>
             </a>
         {% endfor %}

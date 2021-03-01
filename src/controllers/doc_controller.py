@@ -54,36 +54,41 @@ def doc_edit(id):
     pass
     # return render_template("doc-edit.html", content=content)
 
-@md.route("/delete/<int:id>", methods=["DELETE"])
+@md.route("/delete/<int:id>", methods=["GET"])
 @login_required
 def doc_delete(id):
     
     """delete a md file"""
 
+    document = Document.query.filter_by(id=id).first()
+    print(document)
+
     # removes file need to update it when implement s3 bucket
     try:
-        os.remove(f"temp_file_storage/{file_name}")
+        os.remove(f"temp_file_storage/{document.docname}.md")
+        print(f"removed {document.docname}")
     except FileNotFoundError:
         abort(500, description="file not in temp_file_storage")
 
     # removes db record
-    doc = Document.query.filter_by(docname=file_name, user_id=current_user.get_id())
-    db.session.delete(doc)
+    # doc_record = Document.query.filter_by(docname=document.docname, user_id=current_user.get_id())
+    # db.session.delete(doc_record)
+    db.session.delete(document)
     db.session.commit()
 
     return redirect(url_for("document.doc_index"))
 
-@md.route("/discard/<int:id>", methods=["GET"])
+@md.route("/discard", methods=["GET"])
 @login_required
-def doc_discard(id):
+def doc_discard():
     
     """opens an md file to edit"""
 
     pass
 
-@md.route("/save/<int:id>", methods=["POST"])
+@md.route("/save", methods=["POST"])
 @login_required
-def doc_save(id):
+def doc_save():
 
     """updates file in s3 bucket"""
 

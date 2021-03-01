@@ -10,4 +10,4 @@ class Document(db.Model):
     # doc_images = db.relationship("DocImage", backref="document", lazy="dynamic")
 
     def __repr__(self):
-        return f"<Document {self.name}>"
+        return f"<Document {self.docname}>"
