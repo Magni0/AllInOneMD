@@ -3,12 +3,12 @@
 {% block content %}
     <h2>{{ file_name }}</h2>
     <div>
-        <form action="{{ url_for('document.doc_upload') }}">
+        <form action="">
             <textarea name="document" cols="30" rows="10"></textarea>
-            <a href="">
+            <a href="{{ url_for('document.doc_save') }}">
                 <button>Save Changes</button>
             </a>
-            <a href="">
+            <a href="{{ url_for('document.doc_discard') }}">
                 <button>Discard Changes</button>
             </a>
             </form>

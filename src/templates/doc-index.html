@@ -12,7 +12,7 @@
     <div>
         {% for doc in docs %}
             <div>{{ doc.docname }}</div>
-            <a href="{{ url_for('document.doc_retrive', id=doc.id) }}">
+            <a href="{{ url_for('document.doc_edit', id=doc.id) }}">
                 <button>Edit</button>
             </a>
             <a href="">
