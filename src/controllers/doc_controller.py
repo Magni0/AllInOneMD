@@ -75,6 +75,7 @@ def doc_discard(id):
 def doc_save(id):
 
     """updates file in s3 bucket"""
+<<<<<<< HEAD
 
     pass
 
@@ -83,5 +84,7 @@ def doc_save(id):
 def doc_convert(id):
 
     """converts an md to pdf and downloads it to client"""
+=======
+>>>>>>> c9e270754a969f492782d46078f2d8e0d5fc2d84
 
     pass 
