@@ -61,7 +61,6 @@ def doc_delete(id):
     """delete a md file"""
 
     document = Document.query.filter_by(id=id).first()
-    print(document)
 
     # removes file need to update it when implement s3 bucket
     try:
@@ -71,8 +70,6 @@ def doc_delete(id):
         abort(500, description="file not in temp_file_storage")
 
     # removes db record
-    # doc_record = Document.query.filter_by(docname=document.docname, user_id=current_user.get_id())
-    # db.session.delete(doc_record)
     db.session.delete(document)
     db.session.commit()
 
@@ -82,9 +79,9 @@ def doc_delete(id):
 @login_required
 def doc_discard():
     
-    """opens an md file to edit"""
+    """discards changes made in the doc-edit template"""
 
-    pass
+    return redirect(url_for("document.doc_index"))
 
 @md.route("/save", methods=["POST"])
 @login_required
