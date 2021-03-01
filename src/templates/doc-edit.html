@@ -5,8 +5,12 @@
     <div>
         <form action="{{ url_for('document.doc_upload') }}">
             <textarea name="document" cols="30" rows="10"></textarea>
-            <button>Save Changes</button>
-            <button>Discard Changes</button>
-        </form>
+            <a href="">
+                <button>Save Changes</button>
+            </a>
+            <a href="">
+                <button>Discard Changes</button>
+            </a>
+            </form>
     </div>
 {% endblock %}
