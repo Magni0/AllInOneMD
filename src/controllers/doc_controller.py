@@ -4,6 +4,7 @@ from main import db
 from schemas.DocSchema import doc_schema, docs_schema
 from flask import Blueprint, request, render_template, redirect, url_for, abort
 from flask_login import login_required, current_user
+import os
 
 md = Blueprint('document', __name__, url_prefix="/document")
 
@@ -24,7 +25,7 @@ def doc_create():
 
     file_name = request.form.get("file_name")
 
-    # exeption wont work with s3 bucket nedd to refactor
+    # exeption wont work with s3 bucket need to refactor
     # Creates new file in temp_file_storage dir with name from template
     try:
         with open(f"temp_file_storage/{file_name}.md", "x"):
@@ -59,8 +60,18 @@ def doc_delete(id):
     
     """delete a md file"""
 
-    pass
-    # return redirect(url_for("document.doc_index"))
+    # removes file need to update it when implement s3 bucket
+    try:
+        os.remove(f"temp_file_storage/{file_name}")
+    except FileNotFoundError:
+        abort(500, description="file not in temp_file_storage")
+
+    # removes db record
+    doc = Document.query.filter_by(docname=file_name, user_id=current_user.get_id())
+    db.session.delete(doc)
+    db.session.commit()
+
+    return redirect(url_for("document.doc_index"))
 
 @md.route("/discard/<int:id>", methods=["GET"])
 @login_required
@@ -75,7 +86,6 @@ def doc_discard(id):
 def doc_save(id):
 
     """updates file in s3 bucket"""
-<<<<<<< HEAD
 
     pass
 
@@ -84,7 +94,5 @@ def doc_save(id):
 def doc_convert(id):
 
     """converts an md to pdf and downloads it to client"""
-=======
->>>>>>> c9e270754a969f492782d46078f2d8e0d5fc2d84
 
     pass 
