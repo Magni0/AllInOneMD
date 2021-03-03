@@ -102,6 +102,10 @@ def doc_save(id):
     document = Document.query.filter_by(id=id).first()
 
     content_to_save = request.args.get("content")
+<<<<<<< HEAD
+=======
+    # print(content_to_save)
+>>>>>>> 832add22ea946019c096468222e02003e54a6508
 
     # place code to get file from s3 bucket here
 
