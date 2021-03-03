@@ -43,7 +43,9 @@ def doc_create():
     db.session.add(document)
     db.session.commit()
 
-    return render_template("doc-edit.html", file_name=file_name)
+    document_id = Document.query.filter_by(docname=file_name, user_id=current_user.get_id()).first()
+
+    return render_template("doc-edit.html", file_name=file_name, doc_id=document_id.id)
 
 @md.route("/edit/<int:id>", methods=["GET"])
 @login_required
@@ -91,6 +93,9 @@ def doc_discard():
     
     """discards changes made in the doc-edit template"""
 
+    #uncomment once s3 bucket implemented
+    # os.remove(f"temp_file_storage/{document.docname}.md")
+
     return redirect(url_for("document.doc_index"))
 
 @md.route("/save/<int:id>", methods=["GET", "POST"])
@@ -102,10 +107,6 @@ def doc_save(id):
     document = Document.query.filter_by(id=id).first()
 
     content_to_save = request.args.get("content")
-<<<<<<< HEAD
-=======
-    # print(content_to_save)
->>>>>>> 832add22ea946019c096468222e02003e54a6508
 
     # place code to get file from s3 bucket here
 
@@ -116,6 +117,7 @@ def doc_save(id):
 
     #uncomment once s3 bucket implemented
     # os.remove(f"temp_file_storage/{document.docname}.md")
+
     return redirect(url_for("document.doc_index"))
 
 @md.route("/convert/<int:id>", methods=["GET"])
@@ -124,4 +126,17 @@ def doc_convert(id):
 
     """converts an md to pdf and downloads it to client"""
 
-    pass 
+    document = Document.query.filter_by(id=id).first()
+
+    # place code to get file from s3 bucket here
+
+    os.system(f"mdpdf -o temp_file_storage/{document.docname}.pdf temp_file_storage/{document.docname}.md")
+
+    # place code to download pdf file here
+
+    # os.remove(f"temp_file_storage/{document.docname}.pdf")
+    
+    #uncomment once s3 bucket implemented
+    # os.remove(f"temp_file_storage/{document.docname}.md")
+
+    return redirect(url_for("document.doc_index"))

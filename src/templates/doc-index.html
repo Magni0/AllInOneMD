@@ -15,7 +15,7 @@
             <a href="{{ url_for('document.doc_edit', id=doc.id) }}">
                 <button>Edit</button>
             </a>
-            <a href="">
+            <a href="{{ url_for('document.doc_convert', id=doc.id) }}">
                 <button>Convert & Download</button>
             </a>
             <a href="{{ url_for('document.doc_delete', id=doc.id) }}">
