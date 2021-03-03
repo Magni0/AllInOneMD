@@ -1,19 +1,12 @@
-# from models.Authentication import User
-# from functools import wraps
-# from flask import abort
-# from flask_jwt_extended import get_jwt_identity
+from models.Document import Document
+from functools import wraps
+import os
+# from main import create_app
 
-#this is only temporary and will be removed once forms are implemented
-# def auth_decorator(func):
+# def remove_file_decorator(func):
 #     @wraps(func)
 #     def wrapper(*args, **kwargs):
-
-#         user_id = get_jwt_identity()
-#         user = User.query.get(user_id)
-
-#         if not user:
-#             return abort(401, description="Invalid user")
-
-#         return func(*args, user=user, **kwargs)
-
+#         return func(*args, **kwargs)   
+#     print(document)
+#     os.remove(os.path.abspath(f"temp_file_storage/{document.docname}.pdf"))
 #     return wrapper

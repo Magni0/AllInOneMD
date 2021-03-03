@@ -2,7 +2,7 @@ from models.Document import Document
 from models.Authentication import User
 from main import db
 from schemas.DocSchema import doc_schema, docs_schema
-from flask import Blueprint, request, render_template, redirect, url_for, abort
+from flask import Blueprint, request, render_template, redirect, url_for, abort, send_file, after_this_request
 from flask_login import login_required, current_user
 import os
 
@@ -131,12 +131,25 @@ def doc_convert(id):
     # place code to get file from s3 bucket here
 
     os.system(f"mdpdf -o temp_file_storage/{document.docname}.pdf temp_file_storage/{document.docname}.md")
-
-    # place code to download pdf file here
-
-    # os.remove(f"temp_file_storage/{document.docname}.pdf")
     
     #uncomment once s3 bucket implemented
     # os.remove(f"temp_file_storage/{document.docname}.md")
 
-    return redirect(url_for("document.doc_index"))
+    return redirect(url_for("document.doc_download", id=document.id))
+
+@md.route("/download/<int:id>", methods=["GET"])
+@login_required
+def doc_download(id):
+    
+    document = Document.query.filter_by(id=id).first()
+
+    # @after_this_request
+    # def delete_file(response):
+    #     # document = Document.query.filter_by(id=id).first()
+    #     # print(document.docname)
+    #     os.remove(f"temp_file_storage/{document.docname}.pdf")
+    #     return response
+
+    file = os.path.abspath(f"temp_file_storage/{document.docname}.pdf")
+
+    return send_file(file)
