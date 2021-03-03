@@ -59,7 +59,10 @@ def doc_edit(id):
     with open(f"temp_file_storage/{document.docname}.md", "r") as file:
         content = file.read()
 
-    return render_template("doc-edit.html", content=content, file_name=document.docname)
+    # uncomment once s3 bucket implemented
+    # os.remove(f"temp_file_storage/{document.docname}.md")
+
+    return render_template("doc-edit.html", content=content, file_name=document.docname, doc_id=id)
 
 @md.route("/delete/<int:id>", methods=["GET"])
 @login_required
@@ -88,20 +91,23 @@ def doc_discard():
     
     """discards changes made in the doc-edit template"""
 
-    # uncomment once s3 bucket implemented
-    # os.remove(f"temp_file_storage/{document.docname}.md")
     return redirect(url_for("document.doc_index"))
 
-@md.route("/save", methods=["POST"])
+@md.route("/save/<int:id>", methods=["GET", "POST"])
 @login_required
-def doc_save():
+def doc_save(id):
 
     """updates file in s3 bucket"""
 
-    pass
-    content_to_save = request.form.get("content")
+    document = Document.query.filter_by(id=id).first()
 
-    # with open() 
+    content_to_save = request.args.get("content")
+    # print(content_to_save)
+
+    # place code to get file from s3 bucket here
+
+    with open(f"temp_file_storage/{document.docname}.md", "w") as file:
+        content = file.write(content_to_save)
 
     # place code to upload file to s3 bucket here
 
