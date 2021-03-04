@@ -143,6 +143,7 @@ def doc_download(id):
     
     document = Document.query.filter_by(id=id).first()
 
+    # PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'temp_file_storage/file.pdf'
     # @after_this_request
     # def delete_file(response):
     #     # document = Document.query.filter_by(id=id).first()
