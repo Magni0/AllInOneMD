@@ -4,7 +4,7 @@ import glob
 
 cwd = path.dirname(path.realpath(__file__))
 
-chdir(f"{cwd}/../temp_file_storage")
+chdir(f"{cwd}/../tmp")
 
 while True:
     sleep(3600)
