@@ -39,14 +39,14 @@ def doc_create():
 
     # send file to s3 bucket here
     
-    # # connect to s3 bucket
-    # s3 = boto3.client(
-    #     "s3",
-    #     aws_access_key_id=AWS_ACCESS_KEY_ID,
-    #     aws_secret_access_key=AWS_SECRET_ACCESS_KEY
-    # )
+    # connect to s3 bucket
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+    )
 
-    # s3.meta.client.upload_file(f"/temp_file_storage/{file_name}.md", AWS_S3_BUCKET, f"{file_name}.md")
+    s3.meta.client.upload_file(f"/temp_file_storage/{file_name}.md", AWS_S3_BUCKET, f"{file_name}.md")
 
     # creates a new record with the file name and the current user id
     document = Document()
@@ -59,7 +59,7 @@ def doc_create():
     document_id = Document.query.filter_by(docname=file_name, user_id=current_user.get_id()).first()
 
     # uncomment once s3 bucket implemented
-    # os.remove(f"temp_file_storage/{document.docname}.md")
+    os.remove(f"temp_file_storage/{document.docname}.md")
 
     return render_template("doc-edit.html", file_name=file_name, doc_id=document_id.id)
 
