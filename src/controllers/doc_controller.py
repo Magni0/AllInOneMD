@@ -29,21 +29,26 @@ def doc_create():
 
     # exeption wont work with s3 bucket need to refactor
     # Creates new file in tmp dir with name from template
-    try:
-        with open(f"tmp/{file_name}-{current_user.get_id()}.md", "x"):
-            pass
-    except FileExistsError:
-        return abort(400, description="File already exists")
+    with open(f"tmp/{file_name}-{current_user.get_id()}.md", "x"):
+        pass
     
     # connect to s3 bucket
     s3 = boto3.client(
         "s3",
-        aws_access_key_id=AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
     )
 
     # upload file to s3 bucket
-    s3.meta.client.upload_file(f"/tmp/{file_name}.md", AWS_S3_BUCKET, f"{file_name}.md")
+    s3.upload_file(f"tmp/{file_name}-{current_user.get_id()}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
+    
+    # this method only woks with file like objects
+    # bucket = boto3.resource("s3")
+    # bucket.upload_file(f"tmp/{file_name}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
+
+    # method from stackoverflow
+    # s3 = boto3.resource("s3")
+    # s3.Bucket(os.environ.get("AWS_S3_BUCKET")).upload_file(f"tmp/{file_name}-{current_user.get_id()}.md", f"{file_name}.md")
 
     # creates a new record with the file name and the current user id
     document = Document()
