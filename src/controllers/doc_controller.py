@@ -78,6 +78,7 @@ def doc_edit(id):
     document = Document.query.filter_by(id=id).first()
 
     # place code to get file from s3 bucket here or load file from temp
+    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
 
     # opens and reads contents in file in tmp
     with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "r") as file:
