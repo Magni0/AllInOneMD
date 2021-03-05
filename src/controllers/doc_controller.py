@@ -68,6 +68,13 @@ def doc_edit(id):
     
     """get md file to edit"""
 
+    # connect to s3 bucket
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
+    )
+
     document = Document.query.filter_by(id=id).first()
 
     # place code to get file from s3 bucket here or load file from temp
@@ -84,14 +91,17 @@ def doc_delete(id):
     
     """delete a md file"""
 
+    # connect to s3 bucket
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
+    )
+
     document = Document.query.filter_by(id=id).first()
 
     # place code to delete file form s3 bucket here
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> aea106b559b085dc9fbee2c82c50f5491788a632
+    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
 
     # # removes file need to update it when implement s3 bucket
     # try:
