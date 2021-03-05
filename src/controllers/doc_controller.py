@@ -87,7 +87,11 @@ def doc_delete(id):
     document = Document.query.filter_by(id=id).first()
 
     # place code to delete file form s3 bucket here
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> aea106b559b085dc9fbee2c82c50f5491788a632
 
     # # removes file need to update it when implement s3 bucket
     # try:
