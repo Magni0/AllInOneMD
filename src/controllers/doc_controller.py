@@ -1,11 +1,9 @@
-from models.Document import Document
-from models.Authentication import User
-from main import db
-from schemas.DocSchema import doc_schema, docs_schema
-from flask import Blueprint, request, render_template, redirect, url_for, abort, send_file, current_app
-from flask_login import login_required, current_user
-import boto3
 import os
+import boto3
+from main import db
+from flask import Blueprint, request, render_template, redirect, url_for, send_file
+from flask_login import login_required, current_user
+from models.Document import Document
 
 md = Blueprint('document', __name__, url_prefix="/document")
 
