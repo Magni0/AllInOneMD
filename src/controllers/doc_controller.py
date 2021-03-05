@@ -86,12 +86,15 @@ def doc_delete(id):
 
     document = Document.query.filter_by(id=id).first()
 
-    # removes file need to update it when implement s3 bucket
-    try:
-        os.remove(f"tmp/{document.docname}-{current_user.get_id()}.md")
-        print(f"removed {document.docname}")
-    except FileNotFoundError:
-        abort(500, description="file not in tmp")
+    # place code to delete file form s3 bucket here
+
+
+    # # removes file need to update it when implement s3 bucket
+    # try:
+    #     os.remove(f"tmp/{document.docname}-{current_user.get_id()}.md")
+    #     print(f"removed {document.docname}")
+    # except FileNotFoundError:
+    #     abort(500, description="file not in tmp")
 
     # removes db record
     db.session.delete(document)
@@ -116,16 +119,26 @@ def doc_save(id):
 
     """updates file in s3 bucket"""
 
+    # connect to s3 bucket
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
+    )
+
     document = Document.query.filter_by(id=id).first()
 
     content_to_save = request.args.get("content")
 
     # place code to get file from s3 bucket here
+    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
 
     with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "w") as file:
         content = file.write(content_to_save)
 
     # place code to upload file to s3 bucket here
+    # upload file to s3 bucket
+    s3.upload_file(f"tmp/{file_name}-{current_user.get_id()}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
 
     #uncomment once s3 bucket implemented
     # os.remove(f"tmp/{document.docname}.md")
@@ -138,14 +151,23 @@ def doc_convert(id):
 
     """converts an md to pdf and downloads it to client"""
 
+    # connect to s3 bucket
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
+    )
+
     document = Document.query.filter_by(id=id).first()
 
     # place code to get file from s3 bucket here
+    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
 
+    # converts md file to pdf
     os.system(f"mdpdf -o tmp/{document.docname}.pdf tmp/{document.docname}-{current_user.get_id()}.md")
     
     #uncomment once s3 bucket implemented
-    # os.remove(f"tmp/{document.docname}.md")
+    os.remove(f"tmp/{document.docname}.md")
 
     return redirect(url_for("document.doc_download", id=document.id))
 
