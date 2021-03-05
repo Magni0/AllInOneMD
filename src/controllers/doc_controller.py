@@ -41,7 +41,7 @@ def doc_create():
 
     # upload file to s3 bucket
     s3.upload_file(f"tmp/{file_name}-{current_user.get_id()}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
-    
+
     # this method only woks with file like objects
     # bucket = boto3.resource("s3")
     # bucket.upload_file(f"tmp/{file_name}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
@@ -77,12 +77,16 @@ def doc_edit(id):
 
     document = Document.query.filter_by(id=id).first()
 
-    # place code to get file from s3 bucket here or load file from temp
-    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
-
-    # opens and reads contents in file in tmp
-    with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "r") as file:
-        content = file.read()
+    # place code to get file from s3 bucket here or load file from tmp
+    try:
+        # opens and reads contents in file in tmp
+        with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "r") as file:
+            content = file.read()
+    except FileNotFoundError:
+        s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
+        # opens and reads contents in file in tmp
+        with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "r") as file:
+            content = file.read()
 
     return render_template("doc-edit.html", content=content, file_name=document.docname, doc_id=id)
 
@@ -124,7 +128,7 @@ def doc_discard():
     """discards changes made in the doc-edit template"""
 
     #uncomment once s3 bucket implemented
-    # os.remove(f"tmp/{document.docname}.md")
+    os.remove(f"tmp/{document.docname}.md")
 
     return redirect(url_for("document.doc_index"))
 
