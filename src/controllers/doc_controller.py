@@ -74,7 +74,7 @@ def doc_edit(id):
         with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "r") as file:
             content = file.read()
     except FileNotFoundError:
-        s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
+        s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{document.docname}.md", f"tmp/{document.docname}-{current_user.get_id()}.md")
         # opens and reads contents in file in tmp
         with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "r") as file:
             content = file.read()
@@ -97,7 +97,7 @@ def doc_delete(id):
     document = Document.query.filter_by(id=id).first()
 
     # delete file form s3 bucket
-    s3.delete_object(Bucket=os.environ.get("AWS_S3_BUCKET"), Key=f"{file_name}.md")
+    s3.delete_object(Bucket=os.environ.get("AWS_S3_BUCKET"), Key=f"{document.docname}.md")
 
     # # removes file need to update it when implement s3 bucket
     # try:
@@ -118,7 +118,7 @@ def doc_discard():
     
     """discards changes made in the doc-edit template"""
 
-    os.remove(f"tmp/{document.docname}.md")
+    os.remove(f"tmp/{document.docname}-{current_user.get_id()}.md")
 
     return redirect(url_for("document.doc_index"))
 
@@ -140,16 +140,16 @@ def doc_save(id):
     content_to_save = request.args.get("content")
 
     # get file from s3 bucket
-    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
+    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{document.docname}.md", f"tmp/{document.docname}-{current_user.get_id()}.md")
 
     with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "w") as file:
         content = file.write(content_to_save)
 
     # upload file to s3 bucket
-    s3.upload_file(f"tmp/{file_name}-{current_user.get_id()}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
+    s3.upload_file(f"tmp/{document.docname}-{current_user.get_id()}.md", os.environ.get("AWS_S3_BUCKET"), f"{document.docname}.md")
 
     #uncomment once s3 bucket implemented
-    os.remove(f"tmp/{document.docname}.md")
+    os.remove(f"tmp/{document.docname}-{current_user.get_id()}.md")
 
     return redirect(url_for("document.doc_index"))
 
@@ -169,12 +169,12 @@ def doc_convert(id):
     document = Document.query.filter_by(id=id).first()
 
     # get file from s3 bucket
-    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
+    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{document.docname}.md", f"tmp/{document.docname}-{current_user.get_id()}.md")
 
     # converts md file to pdf
     os.system(f"mdpdf -o tmp/{document.docname}.pdf tmp/{document.docname}-{current_user.get_id()}.md")
     
-    os.remove(f"tmp/{document.docname}.md")
+    os.remove(f"tmp/{document.docname}-{current_user.get_id()}.md")
 
     return redirect(url_for("document.doc_download", id=document.id))
 
