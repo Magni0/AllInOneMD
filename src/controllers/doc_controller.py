@@ -27,7 +27,6 @@ def doc_create():
 
     file_name = request.form.get("file_name")
 
-    # exeption wont work with s3 bucket need to refactor
     # Creates new file in tmp dir with name from template
     with open(f"tmp/{file_name}-{current_user.get_id()}.md", "x"):
         pass
@@ -41,14 +40,6 @@ def doc_create():
 
     # upload file to s3 bucket
     s3.upload_file(f"tmp/{file_name}-{current_user.get_id()}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
-
-    # this method only woks with file like objects
-    # bucket = boto3.resource("s3")
-    # bucket.upload_file(f"tmp/{file_name}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
-
-    # method from stackoverflow
-    # s3 = boto3.resource("s3")
-    # s3.Bucket(os.environ.get("AWS_S3_BUCKET")).upload_file(f"tmp/{file_name}-{current_user.get_id()}.md", f"{file_name}.md")
 
     # creates a new record with the file name and the current user id
     document = Document()
@@ -105,8 +96,8 @@ def doc_delete(id):
 
     document = Document.query.filter_by(id=id).first()
 
-    # place code to delete file form s3 bucket here
-    s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
+    # delete file form s3 bucket
+    s3.delete_object(Bucket=os.environ.get("AWS_S3_BUCKET"), Key=f"{file_name}.md")
 
     # # removes file need to update it when implement s3 bucket
     # try:
@@ -127,7 +118,6 @@ def doc_discard():
     
     """discards changes made in the doc-edit template"""
 
-    #uncomment once s3 bucket implemented
     os.remove(f"tmp/{document.docname}.md")
 
     return redirect(url_for("document.doc_index"))
@@ -149,18 +139,17 @@ def doc_save(id):
 
     content_to_save = request.args.get("content")
 
-    # place code to get file from s3 bucket here
+    # get file from s3 bucket
     s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
 
     with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "w") as file:
         content = file.write(content_to_save)
 
-    # place code to upload file to s3 bucket here
     # upload file to s3 bucket
     s3.upload_file(f"tmp/{file_name}-{current_user.get_id()}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
 
     #uncomment once s3 bucket implemented
-    # os.remove(f"tmp/{document.docname}.md")
+    os.remove(f"tmp/{document.docname}.md")
 
     return redirect(url_for("document.doc_index"))
 
@@ -179,13 +168,12 @@ def doc_convert(id):
 
     document = Document.query.filter_by(id=id).first()
 
-    # place code to get file from s3 bucket here
+    # get file from s3 bucket
     s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md", f"tmp/{file_name}-{current_user.get_id()}.md")
 
     # converts md file to pdf
     os.system(f"mdpdf -o tmp/{document.docname}.pdf tmp/{document.docname}-{current_user.get_id()}.md")
     
-    #uncomment once s3 bucket implemented
     os.remove(f"tmp/{document.docname}.md")
 
     return redirect(url_for("document.doc_download", id=document.id))
