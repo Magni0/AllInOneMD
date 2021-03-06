@@ -9,6 +9,10 @@ auth = Blueprint("auth", __name__)
 
 @auth.route("/", methods=["GET"])
 def home():
+    
+    if current_user.is_authenticated:
+        return redirect(url_for("document.doc_index"))
+    
     return render_template("index.html")
 
 @auth.route("/auth/register", methods=["POST"])
@@ -32,7 +36,7 @@ def auth_register():
     return redirect(url_for("auth.login"))
 
 @auth.route("/auth/login", methods=["POST"])
-def auth_login():
+def auth_login():    
     username = request.form.get("username")
     password = request.form.get("password")
 
@@ -60,4 +64,8 @@ def signup():
 
 @auth.route("/login", methods=["GET"])
 def login():
+    
+    if current_user.is_authenticated:
+        return redirect(url_for("document.doc_index"))
+    
     return render_template("login.html")
