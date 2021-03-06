@@ -1,0 +1,6 @@
+    INFO: 2021-03-05 15:05:06,597:               log.py:   20: Logging to C:\Users\Magni0\Documents\Projects\AllInOneMD\src\mdpdf.log
+   DEBUG: 2021-03-05 15:05:06,597:               cli.py:   72: tmp/blah-2.md
+    INFO: 2021-03-05 15:05:06,597:         converter.py:   16: tmp/blah-2.md
+   DEBUG: 2021-03-05 15:05:06,600:      pdf_renderer.py:  446: printSegment: test
+   DEBUG: 2021-03-05 15:05:06,602:      pdf_renderer.py:  446: printSegment: this is a test
+   DEBUG: 2021-03-05 15:05:06,604:      pdf_renderer.py:   50: 0, [1, 'test', 1, 68.0]
