@@ -9,10 +9,6 @@ auth = Blueprint("auth", __name__)
 
 @auth.route("/", methods=["GET"])
 def home():
-    
-    if current_user.is_authenticated:
-        return redirect(url_for("document.doc_index"))
-    
     return render_template("index.html")
 
 @auth.route("/auth/register", methods=["POST"])
