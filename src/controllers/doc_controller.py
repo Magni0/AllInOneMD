@@ -25,10 +25,12 @@ def doc_create():
 
     file_name = request.form.get("file_name")
 
+    file_name = file_name.replace(" ", "_")
+
     # Creates new file in tmp dir with name from template
     with open(f"tmp/{file_name}-{current_user.get_id()}.md", "x"):
         pass
-    
+
     # connect to s3 bucket
     s3 = boto3.client(
         "s3",
@@ -48,6 +50,8 @@ def doc_create():
     db.session.commit()
 
     document_id = Document.query.filter_by(docname=file_name, user_id=current_user.get_id()).first()
+
+    file_name.replace("_", " ")
 
     return render_template("doc-edit.html", file_name=file_name, doc_id=document_id.id)
 
@@ -77,7 +81,10 @@ def doc_edit(id):
         with open(f"tmp/{document.docname}-{current_user.get_id()}.md", "r") as file:
             content = file.read()
 
-    return render_template("doc-edit.html", content=content, file_name=document.docname, doc_id=id)
+    file_name = document.docname
+    file_name = file_name.replace("_", " ")
+
+    return render_template("doc-edit.html", content=content, file_name=file_name, doc_id=id)
 
 @md.route("/delete/<int:id>", methods=["GET"])
 @login_required
