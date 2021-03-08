@@ -13,7 +13,7 @@ def doc_index():
     
     """reterive all md documents from database (not files)"""
 
-    docs = Document.query.filter_by(user_id=current_user.get_id())
+    docs = Document.query.filter_by(user_id=current_user.get_id()).all()
 
     return render_template("doc-index.html", docs=docs)
 

@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <h3>Your Documents</h3>
+    <h1>Your Documents</h1>
     <div>
         <h3>Create New MD File</h3>
         <form action="{{ url_for('document.doc_create') }}" method="post">
@@ -9,7 +9,27 @@
             <button>Create</button>
         </form>
     </div>
+<<<<<<< Updated upstream
     <div>
+=======
+    
+    <div class="card">
+        {% if docs|length %}
+            {% for doc in docs %}
+            <div class="card-body">
+                <h5 class="card-title">{{ doc.docname }}</h5>
+                <a href="{{ url_for('document.doc_edit', id=doc.id) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ url_for('document.doc_convert', id=doc.id) }}" class="btn btn-primary" target="_blank">Convert & Download</a>
+                <a href="{{ url_for('document.doc_delete', id=doc.id) }}" class="btn btn-primary">Delete</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>You havent made any documents yet.</p>
+        {% endif %}
+    </div>
+    
+    <!-- <div>
+>>>>>>> Stashed changes
         {% for doc in docs %}
             <div>{{ doc.docname }}</div>
             <a href="{{ url_for('document.doc_edit', id=doc.id) }}">
