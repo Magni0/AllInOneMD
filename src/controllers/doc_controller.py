@@ -117,11 +117,13 @@ def doc_delete(id):
 
     return redirect(url_for("document.doc_index"))
 
-@md.route("/discard", methods=["GET"])
+@md.route("/discard/<int:id>", methods=["GET"])
 @login_required
-def doc_discard():
+def doc_discard(id):
     
     """discards changes made in the doc-edit template"""
+
+    document = Document.query.filter_by(id=id).first()
 
     os.remove(f"tmp/{document.docname}-{current_user.get_id()}.md")
 
