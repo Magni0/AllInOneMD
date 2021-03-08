@@ -15,8 +15,6 @@ bcrypt = Bcrypt()
 migrate = Migrate()
 login_manager = LoginManager()
 
-# commits working
-
 def create_app():
 
     """This is the main function that works off of the contoller modules, model modules
