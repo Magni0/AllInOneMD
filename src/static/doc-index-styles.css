@@ -1,9 +1,16 @@
+h1 {
+    margin: 1%;
+}
+  
 #custom-create {
+    margin: 2%;
+}
+  
+#custom-card-body {
     display: flex;
-    justify-content: center;
+    padding-inline: 20%;
 }
 
-#custom-card-body {
-    display: inline-flex;
-    justify-content: center;
+.card-options {
+    margin-left: auto;
 }

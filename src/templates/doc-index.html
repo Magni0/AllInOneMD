@@ -14,10 +14,12 @@
         {% if docs|length %}
             {% for doc in docs %}
             <div id="custom-card-body" class="card-body">
-                <h5 class="card-title">{{ doc.docname }}</h5>
-                <a href="{{ url_for('document.doc_edit', id=doc.id) }}" class="btn btn-primary">Edit</a>
-                <a href="{{ url_for('document.doc_convert', id=doc.id) }}" class="btn btn-primary" target="_blank">Convert & Download</a>
-                <a href="{{ url_for('document.doc_delete', id=doc.id) }}" class="btn btn-primary">Delete</a>
+                <h5 id="custom-card-title" class="card-title">{{ doc.docname }}</h5>
+                <div class="card-options">
+                    <a href="{{ url_for('document.doc_edit', id=doc.id) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ url_for('document.doc_convert', id=doc.id) }}" class="btn btn-primary" target="_blank">Convert & Download</a>
+                    <a href="{{ url_for('document.doc_delete', id=doc.id) }}" class="btn btn-primary">Delete</a>
+                </div>
             </div>
             {% endfor %}
         {% else %}
