@@ -17,9 +17,12 @@ def auth_register():
     if request.form.get("Cancel") != None:
         return redirect(url_for("auth.home"))
 
-    # user_fields = user_schema.load(request.json)
-    username = request.form.get("username")
     password = request.form.get("password")
+    username = request.form.get("username")
+
+    # check if username or password are empty    
+    if username == "" or password == "":
+        return abort(400, description="username and password must have values") 
 
     # checks if user already exists
     user = User.query.filter_by(username=username).first()
@@ -44,6 +47,10 @@ def auth_login():
 
     username = request.form.get("username")
     password = request.form.get("password")
+
+    # check if username or password are empty    
+    if username == "" or password == "":
+        return abort(400, description="username and password must have values") 
 
     user = User.query.filter_by(username=username).first()
 
