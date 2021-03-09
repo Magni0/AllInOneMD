@@ -2,14 +2,14 @@
 
 {% block content %}
     <div>
-        <div>
-            <h3>Sign up</h3>
+        <h1 class="register-title">Sign up</h1>
+        <div class="register-form">
+            <form action="{{ url_for('auth.auth_register') }}" method="POST">
+                <input class="register-info" type="text" name="username" placeholder="Username" autofocus="">
+                <input class="register-info" type="text" name="password" placeholder="Password">
+                <input type="submit" name="Register" value="Register">
+                <input type="submit" name="Cancel" value="Cancel">
+            </form>
         </div>
-        <form action="{{ url_for('auth.auth_register') }}" method="POST">
-            <input type="text" name="username" placeholder="Username" autofocus="">
-            <input type="text" name="password" placeholder="Password">
-            <button>Sign up</button>
-        </form>
-        <a href="index.html"><button>Cancel</button></a>
     </div>
 {% endblock %}

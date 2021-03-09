@@ -13,6 +13,10 @@ def home():
 
 @auth.route("/auth/register", methods=["POST"])
 def auth_register():
+
+    if request.form.get("Cancel") != None:
+        return redirect(url_for("auth.home"))
+
     # user_fields = user_schema.load(request.json)
     username = request.form.get("username")
     password = request.form.get("password")

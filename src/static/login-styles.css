@@ -1,3 +1,7 @@
+h1.login-title {
+    margin: 3%;
+}
+
 .login-form {
     display: flex;
     justify-content: center;
