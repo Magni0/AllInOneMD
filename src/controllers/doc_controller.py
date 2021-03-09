@@ -7,6 +7,15 @@ from models.Document import Document
 
 md = Blueprint('document', __name__, url_prefix="/document")
 
+def connect_to_s3():
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
+    )
+
+    return s3
+
 @md.route("/index", methods=["GET"])
 @login_required
 def doc_index():
@@ -32,11 +41,7 @@ def doc_create():
         pass
 
     # connect to s3 bucket
-    s3 = boto3.client(
-        "s3",
-        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
-    )
+    s3 = connect_to_s3()
 
     # upload file to s3 bucket
     s3.upload_file(f"tmp/{file_name}-{current_user.get_id()}.md", os.environ.get("AWS_S3_BUCKET"), f"{file_name}.md")
@@ -62,11 +67,7 @@ def doc_edit(id):
     """get md file to edit"""
 
     # connect to s3 bucket
-    s3 = boto3.client(
-        "s3",
-        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
-    )
+    s3 = connect_to_s3()
 
     document = Document.query.filter_by(id=id).first()
 
@@ -93,11 +94,7 @@ def doc_delete(id):
     """delete a md file"""
 
     # connect to s3 bucket
-    s3 = boto3.client(
-        "s3",
-        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
-    )
+    s3 = connect_to_s3()
 
     document = Document.query.filter_by(id=id).first()
 
@@ -136,11 +133,7 @@ def doc_save(id):
     """updates file in s3 bucket"""
 
     # connect to s3 bucket
-    s3 = boto3.client(
-        "s3",
-        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
-    )
+    s3 = connect_to_s3()
 
     document = Document.query.filter_by(id=id).first()
 
@@ -167,11 +160,7 @@ def doc_convert(id):
     """converts an md to pdf and downloads it to client"""
 
     # connect to s3 bucket
-    s3 = boto3.client(
-        "s3",
-        aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
-    )
+    s3 = connect_to_s3()
 
     document = Document.query.filter_by(id=id).first()
 
