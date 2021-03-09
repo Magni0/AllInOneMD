@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Your Documents</h1>
-    <div>
+    <div id="custom-create">
         <h3>Create New MD File</h3>
         <form action="{{ url_for('document.doc_create') }}" method="post">
             <input type="text" name="file_name" placeholder="File Name">
@@ -13,7 +13,7 @@
     <div class="card">
         {% if docs|length %}
             {% for doc in docs %}
-            <div class="card-body">
+            <div id="custom-card-body" class="card-body">
                 <h5 class="card-title">{{ doc.docname }}</h5>
                 <a href="{{ url_for('document.doc_edit', id=doc.id) }}" class="btn btn-primary">Edit</a>
                 <a href="{{ url_for('document.doc_convert', id=doc.id) }}" class="btn btn-primary" target="_blank">Convert & Download</a>
