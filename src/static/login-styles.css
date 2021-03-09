@@ -1,0 +1,18 @@
+.login-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+input.login-info {
+    display: block;
+    margin-bottom: 1%;
+}
+
+/* #cancel-button {
+    position: relative;
+} */
+
+div.checkbox {
+    display: block;
+}

@@ -32,7 +32,12 @@ def auth_register():
     return redirect(url_for("auth.login"))
 
 @auth.route("/auth/login", methods=["POST"])
-def auth_login():    
+def auth_login():
+
+    if request.form.get("Cancel") != None:
+        print("worked")
+        return redirect(url_for("auth.home"))
+
     username = request.form.get("username")
     password = request.form.get("password")
 
