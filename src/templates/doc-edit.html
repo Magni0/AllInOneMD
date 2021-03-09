@@ -4,11 +4,17 @@
     <h1 id="doc-edit-title">{{ file_name }}</h1>
     <div>
         <form action="{{ url_for('document.doc_save', id=doc_id) }}">
-            <textarea name="content" cols="80" rows="50" id="content-box">{{ content }}</textarea>
-            <button>Save Changes</button>
+            <div id="content-box">
+                <textarea name="content" cols="80" rows="50">{{ content }}</textarea>
+            </div>
+            <div id="save-button">
+                <button class="btn btn-primary">Save Changes</button>
+            </div>
+            <!-- <input type="submit" name="Save" value="Save">
+            <input type="submit" name="Discard" value="Discard"> -->
         </form>
-            <a href="{{ url_for('document.doc_discard', id=doc_id) }}">
-                <button>Discard Changes</button>
-            </a>
+                <a href="{{ url_for('document.doc_discard', id=doc_id) }}" id="discard-button">
+                    <button class="btn btn-primary">Discard Changes</button>
+                </a>
     </div>
 {% endblock %}

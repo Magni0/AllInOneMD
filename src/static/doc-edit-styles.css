@@ -1,9 +1,21 @@
 #doc-edit-title {
-    margin-left: 20%;
-    margin-bottom: 5;
+    display: flex;
+    justify-content: center;
 }
 
 #content-box {
+    display: flex;
+    justify-content: center;
+}
+
+#save-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#discard-button {
     display: flex;
     justify-content: center;
 }
