@@ -22,7 +22,11 @@ def auth_register():
 
     # check if username or password are empty    
     if username == "" or password == "":
-        return abort(400, description="username and password must have values") 
+        return abort(400, description="username and password must have values")
+    
+    # check for spaces in usernames
+    if ' ' in username or ' ' in password:
+        return abort(400, description="cannot put whitespaces in username or password")
 
     # checks if user already exists
     user = User.query.filter_by(username=username).first()
