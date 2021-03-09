@@ -1,0 +1,25 @@
+#main-title {
+    display: flex;
+    justify-content: center;
+}
+
+/* #main-page {
+    display: inline-block;
+    justify-content: center;
+} */
+
+p.main-intro {
+    display: flex;
+    justify-content: center;
+    padding-inline: 30%;
+    margin-top: 10%;
+}
+
+#main-options {
+    display: flex;
+    justify-content: center;
+}
+
+.main-signin {
+    margin-right: 1%;
+}

@@ -2,13 +2,17 @@
 
 {% block content %}
     <div>
-        <h2>Home</h2>
-        <p>Welcome to All In One MarkDown where you can create, store, edit and download pdf files from your markdown. One place for all your documentation needs.</p>
-        <a href="/signup">
-            <button>Sign up</button>
-        </a>
-        <a href="/login">
-            <button>Login</button>
-        </a>
+        <h1 id="main-title">All In One MD</h1>
+        <div id="main-page">
+            <p class="main-intro">Welcome to All In One MarkDown where you can create, store, edit and download pdf files from your markdown. One place for all your documentation needs.</p>
+            <div id="main-options">
+                <a class="main-signin" href="/signup">
+                    <button>Sign up</button>
+                </a>
+                <a href="/login">
+                    <button>Login</button>
+                </a>
+            </div>
+        </div>
     </div>
 {% endblock %}
