@@ -1,6 +1,3 @@
-    INFO: 2021-03-08 14:59:09,474:               log.py:   20: Logging to /mnt/c/Users/logan/Documents/Projects/AllInOneMD/src/mdpdf.log
-   DEBUG: 2021-03-08 14:59:09,475:               cli.py:   72: tmp/new_file-1.md
-    INFO: 2021-03-08 14:59:09,477:         converter.py:   16: tmp/new_file-1.md
-   DEBUG: 2021-03-08 14:59:09,482:      pdf_renderer.py:  446: printSegment: test title
-   DEBUG: 2021-03-08 14:59:09,487:      pdf_renderer.py:  446: printSegment: test content
-   DEBUG: 2021-03-08 14:59:09,489:      pdf_renderer.py:   50: 0, [1, 'test title', 1, 68.0]
+    INFO: 2021-03-08 21:18:00,166:               log.py:   20: Logging to /mnt/c/Users/logan/Documents/Projects/AllInOneMD/src/mdpdf.log
+   DEBUG: 2021-03-08 21:18:00,167:               cli.py:   72: tmp/file-1.md
+    INFO: 2021-03-08 21:18:00,168:         converter.py:   16: tmp/file-1.md

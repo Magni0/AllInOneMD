@@ -1,7 +1,7 @@
 import os
 import boto3
 from main import db
-from flask import Blueprint, request, render_template, redirect, url_for, send_file
+from flask import Blueprint, request, render_template, redirect, url_for, send_file, after_this_request
 from flask_login import login_required, current_user
 from models.Document import Document
 
@@ -192,12 +192,12 @@ def doc_download(id):
     document = Document.query.filter_by(id=id).first()
 
     # PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'temp_file_storage/file.pdf'
-    # @after_this_request
-    # def delete_file(response):
-    #     # document = Document.query.filter_by(id=id).first()
-    #     # print(document.docname)
-    #     os.remove(f"tmp/{document.docname}.pdf")
-    #     return response
+    @after_this_request
+    def delete_file(response):
+        # document = Document.query.filter_by(id=id).first()
+        # print(document.docname)
+        os.remove(f"tmp/{document.docname}.pdf")
+        return response
 
     file = os.path.abspath(f"tmp/{document.docname}.pdf")
 
