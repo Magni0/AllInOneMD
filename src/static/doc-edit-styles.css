@@ -1,0 +1,13 @@
+#doc-edit-title {
+    margin-left: 20%;
+    margin-bottom: 5;
+}
+
+#content-box {
+    display: flex;
+    justify-content: center;
+}
+
+/* .edit-doc {
+
+} */

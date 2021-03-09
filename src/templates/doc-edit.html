@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <h2>{{ file_name }}</h2>
+    <h1 id="doc-edit-title">{{ file_name }}</h1>
     <div>
-        <form action="{{ url_for('document.doc_save', id=doc_id) }}" id="edit_form">
-            <textarea name="content" cols="30" rows="10" form="edit_form">{{ content }}</textarea>
+        <form action="{{ url_for('document.doc_save', id=doc_id) }}">
+            <textarea name="content" cols="80" rows="50" id="content-box">{{ content }}</textarea>
             <button>Save Changes</button>
         </form>
             <a href="{{ url_for('document.doc_discard', id=doc_id) }}">

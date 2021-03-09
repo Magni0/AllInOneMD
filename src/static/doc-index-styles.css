@@ -1,4 +1,9 @@
 #custom-create {
-    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#custom-card-body {
+    display: inline-flex;
     justify-content: center;
 }
