@@ -69,7 +69,7 @@ class ProductionConfig(Config):
         """gets SECRET_KEY from .env
         """
 
-        value = SECRET_KEY
+        value = os.environ.get("SECRET_KEY")
 
         if not value:
             raise ValueError("SECRET_KEY is not set")
