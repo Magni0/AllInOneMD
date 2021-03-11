@@ -1,5 +1,7 @@
 import os
 import boto3
+from markdown import markdown
+import pdfkit
 from main import db
 from flask import Blueprint, request, render_template, redirect, url_for, send_file, after_this_request
 from flask_login import login_required, current_user
@@ -168,7 +170,11 @@ def doc_convert(id):
     s3.download_file(os.environ.get("AWS_S3_BUCKET"), f"{document.docname}.md", f"tmp/{document.docname}-{current_user.get_id()}.md")
 
     # converts md file to pdf
-    os.system(f"mdpdf -o tmp/{document.docname}.pdf tmp/{document.docname}-{current_user.get_id()}.md")
+    # os.system(f"mdpdf -o tmp/{document.docname}.pdf tmp/{document.docname}-{current_user.get_id()}.md")
+    with open(f"tmp/{document.docname}-{current_user.get_id()}.md", 'r') as f:
+        html_text = markdown(f.read(), output_format='html4')
+
+    pdfkit.from_string(html_text, f"tmp/{document.docname}.pdf")
     
     os.remove(f"tmp/{document.docname}-{current_user.get_id()}.md")
 
@@ -181,12 +187,12 @@ def doc_download(id):
     document = Document.query.filter_by(id=id).first()
 
     # PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'temp_file_storage/file.pdf'
-    @after_this_request
-    def delete_file(response):
-        # document = Document.query.filter_by(id=id).first()
-        # print(document.docname)
-        os.remove(f"tmp/{document.docname}.pdf")
-        return response
+    # @after_this_request
+    # def delete_file(response):
+    #     # document = Document.query.filter_by(id=id).first()
+    #     # print(document.docname)
+    #     os.remove(f"tmp/{document.docname}.pdf")
+    #     return response
 
     file = os.path.abspath(f"tmp/{document.docname}.pdf")
 
