@@ -14,6 +14,7 @@ The primary audience of this web app are students of a field in IT and people in
 
 - Python3
 - HTML/CSS
+- jinja
 - PostgreSQL
 - NGINX
 - Gunicorn

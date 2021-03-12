@@ -1,5 +1,7 @@
 import unittest
-import json
+import jinja2
+# from flask import Blueprint, request, jsonify, abort, redirect, render_template, url_for
+# from flask_login import login_required, login_user, logout_user, current_user
 from main import create_app, db
 
 class TestAuth(unittest.TestCase):
@@ -23,6 +25,23 @@ class TestAuth(unittest.TestCase):
     # test not functional
     def test_register(self):
         pass
+        # context = {
+        #     'username': 'testusername',
+        #     'password': 'testpassword'
+        # }
+        
+        # path = 'templates'
+        # filename = 'register.html'
+
+        # rendered = jinja2.Environment(
+        # loader=jinja2.FileSystemLoader(path)
+        # ).get_template(filename).render(context)
+
+        # `rendered` is now a string with rendered template
+        # do some asserts on `rendered` string 
+        # i.e.
+        # assert 'test_value' in rendered
+        # print(rendered)
         # response = self.client.post(
         #     "/auth/register/",
         #     data=json.dumps({"username":"testname", "password": "testpass"}),
