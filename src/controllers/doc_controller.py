@@ -174,6 +174,10 @@ def doc_convert(id):
     with open(f"tmp/{document.docname}-{current_user.get_id()}.md", 'r') as f:
         html_text = markdown(f.read(), output_format='html4')
 
+    # with open(f"tmp/{document.docname}.html", 'w') as f:
+    #     f.write(html_text)
+
+    # pdfkit.from_file(f"tmp/{document.docname}.html", f"tmp/{document.docname}.pdf") 
     pdfkit.from_string(html_text, f"tmp/{document.docname}.pdf")
     
     os.remove(f"tmp/{document.docname}-{current_user.get_id()}.md")
@@ -187,12 +191,12 @@ def doc_download(id):
     document = Document.query.filter_by(id=id).first()
 
     # PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'temp_file_storage/file.pdf'
-    # @after_this_request
-    # def delete_file(response):
+    @after_this_request
+    def delete_file(response):
     #     # document = Document.query.filter_by(id=id).first()
     #     # print(document.docname)
-    #     os.remove(f"tmp/{document.docname}.pdf")
-    #     return response
+        os.remove(f"tmp/{document.docname}.pdf")
+        return response
 
     file = os.path.abspath(f"tmp/{document.docname}.pdf")
 
